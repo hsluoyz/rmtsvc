@@ -18,6 +18,11 @@ rmtsvc supports **Windows XP and later (including Win7, Win8 and Win10)**. You c
 2. Run `rmtsvc.exe -i` and `rmtsvc.exe -s` to install and start the rmtsvc service.
 3. Launch your web browser to `http://127.0.0.1:777`, username is `abc`, password is `123`, log on the portal and do your stuff.
 
+## Download
+
+If you don't want to build the binary by yourself, the prebuilt binaries can always be found here:
+https://github.com/nmap/npcap/releases
+
 ## License
 
 rmtsvc is published under [**The MIT License (MIT)**](http://opensource.org/licenses/MIT).
