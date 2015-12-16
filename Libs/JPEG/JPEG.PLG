@@ -1,0 +1,155 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: jpeg - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPC1.tmp" with contents
+[
+/nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /Fo".\Release/" /Fd".\Release/" /FD /c 
+"E:\yyc\msnbot\JPEG\Jcapi.c"
+"E:\yyc\msnbot\JPEG\Jccoefct.c"
+"E:\yyc\msnbot\JPEG\Jccolor.c"
+"E:\yyc\msnbot\JPEG\Jcdctmgr.c"
+"E:\yyc\msnbot\JPEG\Jchuff.c"
+"E:\yyc\msnbot\JPEG\Jcmainct.c"
+"E:\yyc\msnbot\JPEG\Jcmarker.c"
+"E:\yyc\msnbot\JPEG\Jcmaster.c"
+"E:\yyc\msnbot\JPEG\Jcomapi.c"
+"E:\yyc\msnbot\JPEG\Jcparam.c"
+"E:\yyc\msnbot\JPEG\Jcprepct.c"
+"E:\yyc\msnbot\JPEG\Jcsample.c"
+"E:\yyc\msnbot\JPEG\Jdapi.c"
+"E:\yyc\msnbot\JPEG\Jdatadst.c"
+"E:\yyc\msnbot\JPEG\Jdatasrc.c"
+"E:\yyc\msnbot\JPEG\Jdcoefct.c"
+"E:\yyc\msnbot\JPEG\Jdcolor.c"
+"E:\yyc\msnbot\JPEG\Jddctmgr.c"
+"E:\yyc\msnbot\JPEG\Jdhuff.c"
+"E:\yyc\msnbot\JPEG\Jdmainct.c"
+"E:\yyc\msnbot\JPEG\Jdmarker.c"
+"E:\yyc\msnbot\JPEG\Jdmaster.c"
+"E:\yyc\msnbot\JPEG\Jdmerge.c"
+"E:\yyc\msnbot\JPEG\Jdpostct.c"
+"E:\yyc\msnbot\JPEG\Jdsample.c"
+"E:\yyc\msnbot\JPEG\Jerror.c"
+"E:\yyc\msnbot\JPEG\Jfdctflt.c"
+"E:\yyc\msnbot\JPEG\Jfdctfst.c"
+"E:\yyc\msnbot\JPEG\Jfdctint.c"
+"E:\yyc\msnbot\JPEG\Jidctflt.c"
+"E:\yyc\msnbot\JPEG\Jidctfst.c"
+"E:\yyc\msnbot\JPEG\Jidctint.c"
+"E:\yyc\msnbot\JPEG\Jidctred.c"
+"E:\yyc\msnbot\JPEG\Jmemmgr.c"
+"E:\yyc\msnbot\JPEG\Jmemnobs.c"
+"E:\yyc\msnbot\JPEG\Jquant1.c"
+"E:\yyc\msnbot\JPEG\Jquant2.c"
+"E:\yyc\msnbot\JPEG\Jutils.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPC1.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPC2.tmp" with contents
+[
+/nologo /out:".\Release\JPEG.lib" 
+.\Release\Jcapi.obj
+.\Release\Jccoefct.obj
+.\Release\Jccolor.obj
+.\Release\Jcdctmgr.obj
+.\Release\Jchuff.obj
+.\Release\Jcmainct.obj
+.\Release\Jcmarker.obj
+.\Release\Jcmaster.obj
+.\Release\Jcomapi.obj
+.\Release\Jcparam.obj
+.\Release\Jcprepct.obj
+.\Release\Jcsample.obj
+.\Release\Jdapi.obj
+.\Release\Jdatadst.obj
+.\Release\Jdatasrc.obj
+.\Release\Jdcoefct.obj
+.\Release\Jdcolor.obj
+.\Release\Jddctmgr.obj
+.\Release\Jdhuff.obj
+.\Release\Jdmainct.obj
+.\Release\Jdmarker.obj
+.\Release\Jdmaster.obj
+.\Release\Jdmerge.obj
+.\Release\Jdpostct.obj
+.\Release\Jdsample.obj
+.\Release\Jerror.obj
+.\Release\Jfdctflt.obj
+.\Release\Jfdctfst.obj
+.\Release\Jfdctint.obj
+.\Release\Jidctflt.obj
+.\Release\Jidctfst.obj
+.\Release\Jidctint.obj
+.\Release\Jidctred.obj
+.\Release\Jmemmgr.obj
+.\Release\Jmemnobs.obj
+.\Release\Jquant1.obj
+.\Release\Jquant2.obj
+.\Release\Jutils.obj
+]
+Creating command line "link.exe -lib @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPC2.tmp"
+<h3>Output Window</h3>
+Compiling...
+Jcapi.c
+Jccoefct.c
+Jccolor.c
+Jcdctmgr.c
+E:\yyc\msnbot\JPEG\Jcdctmgr.c(307) : warning C4244: '=' : conversion from 'int ' to 'float ', possible loss of data
+E:\yyc\msnbot\JPEG\Jcdctmgr.c(308) : warning C4244: '=' : conversion from 'int ' to 'float ', possible loss of data
+E:\yyc\msnbot\JPEG\Jcdctmgr.c(309) : warning C4244: '=' : conversion from 'int ' to 'float ', possible loss of data
+E:\yyc\msnbot\JPEG\Jcdctmgr.c(310) : warning C4244: '=' : conversion from 'int ' to 'float ', possible loss of data
+E:\yyc\msnbot\JPEG\Jcdctmgr.c(311) : warning C4244: '=' : conversion from 'int ' to 'float ', possible loss of data
+E:\yyc\msnbot\JPEG\Jcdctmgr.c(312) : warning C4244: '=' : conversion from 'int ' to 'float ', possible loss of data
+E:\yyc\msnbot\JPEG\Jcdctmgr.c(313) : warning C4244: '=' : conversion from 'int ' to 'float ', possible loss of data
+E:\yyc\msnbot\JPEG\Jcdctmgr.c(314) : warning C4244: '=' : conversion from 'int ' to 'float ', possible loss of data
+Jchuff.c
+Jcmainct.c
+Jcmarker.c
+Jcmaster.c
+Jcomapi.c
+Jcparam.c
+Jcprepct.c
+Jcsample.c
+Jdapi.c
+Jdatadst.c
+Jdatasrc.c
+Jdcoefct.c
+Jdcolor.c
+Jddctmgr.c
+Jdhuff.c
+Jdmainct.c
+Generating Code...
+Compiling...
+Jdmarker.c
+Jdmaster.c
+Jdmerge.c
+Jdpostct.c
+Jdsample.c
+Jerror.c
+Jfdctflt.c
+Jfdctfst.c
+Jfdctint.c
+Jidctflt.c
+Jidctfst.c
+Jidctint.c
+Jidctred.c
+Jmemmgr.c
+Jmemnobs.c
+Jquant1.c
+Jquant2.c
+Jutils.c
+Generating Code...
+E:\yyc\msnbot\JPEG\Jdmaster.c(492) : warning C4761: integral size mismatch in argument; conversion supplied
+Creating library...
+
+
+
+<h3>Results</h3>
+JPEG.lib - 0 error(s), 9 warning(s)
+</pre>
+</body>
+</html>

@@ -1,0 +1,23 @@
+如果不太喜欢rmtsvc自带的web管理控制页面风格，而且你对Javascript和HTML比较熟悉
+那么你可以自由的定制自己的页面，直接修改本压缩包中的html和js脚本文件。
+
+要启用你自己的web控制管理页面，你必须在rmtsvc的ini配置文件里webs配置命令行加上resource=FALSE
+此句的含义是告诉rmtsvc不启用exe自身带的web管理控制页面。
+如果你定制的web页面不在exe当前目录下，例如在exe所在目录的html子目录中，那么你还要指定web服务的根路径
+例如: webs port=7779 root=html resource=FALSE
+试着用浏览器去访问rmtsvc，呵呵，是不是你自己定制的管理控制页面啊
+
+如果你认为你做的管理控制页面很棒，别忘了发给俺一份。俺可以考虑内置到rmtsvc内:)
+
+设置web服务的相关信息
+命令格式: 
+	webs [port=<web服务端口>] [bindip=<本服务绑定的本机IP>] [ssl_enabled=true] [ssl_verify=true]
+port=<服务端口>    : 设置服务端口，如果不设置则默认为7778.设置为0则不启动web服务 <0则随即分配端口
+bindip=<本服务绑定的本机IP> : 设置本服务绑定的本机IP，如果不设置则默认绑定本机所有IP
+ssl_enabled=true: 指示本服务是为SSL加密服务，如果不配置则为普通服务
+ssl_verify=true：只有指定ssl_enabled=true本参数才有效，只是此SSL服务需要验证客户端证书，默认不需要
+
+resource=FALSE : 不使用exe自身带的web控制管理html/js页面，使用用户自己定制修改的html/js页面
+root=<web服务的根路径>: 指定本web服务的根所对应的物理路径，可配置绝对或相对路径。如果不指定则默认为
+                      exe自身所在的目录。例如如果配置为root=html则说明web服务的根为exe所在目录的html子目录
+                      

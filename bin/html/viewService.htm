@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<SCRIPT LANGUAGE=javascript src="common.js"></SCRIPT>
+<SCRIPT LANGUAGE=javascript src="viewService.js"></SCRIPT>
+</HEAD>
+<body style="overflow:hidden;" onload="window_onload()">
+<table WIDTH=100%  height=100% BORDER=1 CELLSPACING=0 CELLPADDING=0>
+<tr height=25px>
+<td  valign=middle>
+&nbsp;<b>服务列表</b>&nbsp;&nbsp;
+<input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="刷 新" onclick="javascript:slistXML.src='/slist';">
+<input id=btnStart type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' DISABLED 
+ onmouseover='javascript:this.className="btnUP";' value="启 动" onclick="javascript:slistXML.src='/slist?cmd=run&sname='+curSname;">
+<input id=btnStop type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' DISABLED 
+ onmouseover='javascript:this.className="btnUP";' value="停 止" onclick="javascript:slistXML.src='/slist?cmd=stop&sname='+curSname;">
+<input id=btnForbid type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' DISABLED 
+ onmouseover='javascript:this.className="btnUP";' value="禁 用" onclick="javascript:slistXML.src='/slist?cmd=forbid&sname='+curSname;">
+<input id=btnManual type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' DISABLED 
+ onmouseover='javascript:this.className="btnUP";' value="手 动" onclick="javascript:slistXML.src='/slist?cmd=manual&sname='+curSname;">
+<input id=btnAuto type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' DISABLED 
+ onmouseover='javascript:this.className="btnUP";' value="自 动" onclick="javascript:slistXML.src='/slist?cmd=auto&sname='+curSname;">
+&nbsp;&nbsp;<span id="lblService" name="lblService"></span>
+</td>
+</tr>
+
+<tr>
+<td valign=top >
+ <div style="height:100%;width:100%;overflow:auto;" >
+ <xml id="slistXML" src="/slist" onreadystatechange="javascript:showPopup(250, 200, 150, 20);" ondatasetcomplete="javascript:hidePopup();"></xml>
+ <table id=tblService name=tblService datasrc="#slistXML" width=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+ <THEAD>
+ <tr height=18px bgColor="Silver">
+ <th width=20px > &nbsp; </th>
+ <th width=60px style="cursor:hand" onclick="sort('slistXML','slistStyle','status');"> <u>服务状态</u> </th>
+ <th width=60px style="cursor:hand" onclick="sort('slistXML','slistStyle','rtype');"> <u>启动类别</u> </th>
+ <th width=120px> 服务类型 </th>
+ <th style="cursor:hand" onclick="sort('slistXML','slistStyle','sname');"> <u>服务名</u> </th>
+ <th> 显示名称 </th>
+ <th> 服务描述 </th>
+ <th> 服务模块路径 </th>
+ </tr><THEAD>
+ <TBODY>
+ <tr onmousemove="javascript:this.style.background='#e5e5e5';" onmouseout="javascript:this.style.background='#ffffff';" 
+  onclick="javascript:serviceClick(this);" style="cursor:hand;">
+ <td align=center ><span datafld="id" ></span></td>
+ <td align=center ><span datafld="status" ></span></td>
+ <td align=center ><span datafld="rtype" ></span></td>
+ <td align=center ><span datafld="stype" ></span></td>
+ <td ><span datafld="sname"></span></td>
+ <td ><span datafld="sdisp" ></span></td>
+ <td ><span datafld="sdesc" ></span></td>
+ <td ><span datafld="spath" ></span></td>
+ </tr>
+ <TBODY></table>
+ </div>
+</td>
+</tr>
+
+</table>
+
+<xml id="slistStyle"> 
+<xmlroot> 
+<xsl:for-each select="service" order-by="" xmlns:xsl="http://www.w3.org/TR/WD-xsl"> 
+<service> 
+<id><xsl:value-of select="id"/></id>
+<status><xsl:value-of select="status"/></status> 
+<rtype><xsl:value-of select="rtype"/></rtype> 
+<stype><xsl:value-of select="stype"/></stype>
+<sname><xsl:value-of select="sname"/></sname> 
+<sdisp><xsl:value-of select="sdisp"/></sdisp> 
+<sdesc><xsl:value-of select="sdesc"/></sdesc> 
+<spath><xsl:value-of select="spath"/></spath> 
+</service> 
+</xsl:for-each> 
+</xmlroot> 
+</xml> 
+
+</BODY>
+</HTML>

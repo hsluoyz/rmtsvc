@@ -1,0 +1,126 @@
+<HTML>
+<HEAD><title>文件上载</title>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<SCRIPT LANGUAGE=javascript src="common.js"></SCRIPT>
+<SCRIPT LANGUAGE="javascript">
+<!--
+	var xmlRatio=null;
+	var autoRefresh=0;
+	function processRatio() 
+	{
+		if (xmlRatio.readyState == 4) { // 判断对象状态
+			if (xmlRatio.status == 200) 
+			{ // 信息已经成功返回，开始处理信息
+				var xmlobj = xmlRatio.responseXML;
+				var node_ratio=xmlobj.getElementsByTagName("ratio");
+				var node_rbyte=xmlobj.getElementsByTagName("rbyte");
+				var node_abyte=xmlobj.getElementsByTagName("abyte");
+				var node_speed=xmlobj.getElementsByTagName("speed");
+				document.all("lblRatio").innerText="上传进度: "+node_ratio.item(0).text+"  上传速度: "+node_speed.item(0).text;
+				document.all("lblBytes").innerText="上传字节: "+node_rbyte.item(0).text+"  总字节数: "+node_abyte.item(0).text;
+				if(autoRefresh>0) window.setTimeout("get_upratio()",autoRefresh);
+            		}
+        	}
+	}
+	function get_upratio()
+	{
+    		if(!xmlRatio) return;
+    		xmlRatio.open("GET", "/get_upratio", true);
+		xmlRatio.onreadystatechange = processRatio;
+    		xmlRatio.send( null);
+	}
+	
+	function processRequest() 
+	{
+		if (xmlHttp.readyState == 4) { // 判断对象状态
+			autoRefresh=0;
+			if (xmlHttp.status == 200) 
+			{ // 信息已经成功返回，开始处理信息
+				if(!window.confirm("文件上载成功，是否继续上载"))
+				{
+					window.returnValue=1;
+					window.close();
+				}
+            		}
+            		else alert("上传失败，status="+xmlHttp.status)
+        	}
+	}
+	function window_onload()
+	{
+		if(!oPopup) createpopup();
+		if(!xmlHttp) createXMLHttpRequest();
+		var spath=window.dialogArguments;
+		document.all("destpath").value=spath;
+		
+		if (window.ActiveXObject) {
+        		xmlRatio = new ActiveXObject("Microsoft.XMLHTTP");
+    		} 
+    		else if (window.XMLHttpRequest) {
+        		xmlRatio = new XMLHttpRequest();
+    		}
+	}
+	
+	// 上传函数
+	function sendfile()
+	{
+		var ado_stream=false;
+		try
+		{
+		ado_stream = new ActiveXObject("ADODB.Stream"); 
+		if(!ado_stream) throw "error";
+		}
+		catch(e)
+		{
+			alert("不能创建ADODB.Stream对象，你的注册表可能设置禁用此对象!");
+			return;
+		}
+		
+		var destpath=document.form1.destpath.value;
+		var sourcefile=document.form1.sourcefile.value;
+		var filename=sourcefile.substr(sourcefile.lastIndexOf("\\")+1);
+		
+		xmlHttp.open("POST", "/upload?path="+destpath+"&name="+filename, true);
+		xmlHttp.setRequestHeader("Content-Type","text/xml");
+		xmlHttp.onreadystatechange = processRequest;
+		ado_stream.Type = 1; // 1=adTypeBinary 
+		ado_stream.Open(); 
+		try
+		{
+		ado_stream.LoadFromFile(sourcefile);
+		}
+		catch(e)
+		{
+			alert("当前IE安全设置禁止通过域访问数据资源\r\n请将此选项设为启用或提示!");
+			return;
+		}
+		
+		autoRefresh=1000;
+		window.setTimeout("get_upratio()",autoRefresh);
+		
+		xmlHttp.send( ado_stream.Read(-1) );
+		ado_stream.Close();
+	}
+	
+	function window_onunload()
+	{
+		xmlHttp.abort();
+	}
+//-->
+</SCRIPT>
+</HEAD>
+<body bgColor=silver onload="window_onload()" onunload="window_onunload()" style="overflow:hidden;">
+<form name="form1" name="form1"  method="post" >
+  &nbsp;<label id=lblRatio name=lblRatio></label><br>
+  &nbsp;<label id=lblBytes name=lblBytes></label><br>
+  &nbsp;目的路径：<br>&nbsp;
+  <input type="text" id=destpath name=destpath class="txtInput_b" value="">
+  <br>&nbsp;源文件：<br>&nbsp;
+  <input name="sourcefile" id="sourcefile" TYPE=FILE class="txtInput_b">
+  <br><br><center>
+  <INPUT TYPE=button VALUE="文件上载" onclick="javascript:sendfile();">
+  </center>
+</form>
+<br>
+</body>
+</HTML>

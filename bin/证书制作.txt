@@ -1,0 +1,91 @@
+证书认证管理及证书制作步骤
+
+一、证书制作工具文件及目录说明
+libeay32.dll	----	SSL 支持库
+SSLeay32.dll	----	SSL 支持库
+openssl.cnf	----	证书管理及配置文
+demoCA目录
+index.txt	----	记录所有签发或销毁的证书信息，是一个文件数据库
+index.txt.old	----	顾名思义就是index.txt的上一次更新前文件备份
+serial		----	用来产生证书序号的文件，记录当前序号
+serial.old	----	serial的上一次更新前文件备份
+private目录	----	存放CA根证书私钥文件 cakey.pem
+newcerts目录	----	本CA已签发证书的备份目录
+
+二、CA认证中心初始化
+每个CA认证中心要有自己的一个根证书，用来签发/撤销证书
+根证书其实就是一个自签的证书，因此建立CA第一步要产生一个自签名的根证书
+命令:
+openssl req -x509 -newkey rsa:1024 -keyout cakey.pem -out cacert.pem -days 3650 -config openssl.cnf
+然后依据提示输入相应信息,例如:
+     PEM pass phrase：123456				//此处输入根证书的密码，此密码要记好
+     然后需要输入下列信息： 
+     Country Name: CN  					//输入两位的国家缩写，例如CN、US等，不要输入错误
+     State or Province Name: beijing			//省份名称 
+     Locality Name: bj 					//城市名称
+     Organization Name: casoft 				//公司/机构名称，即本CA机构名称
+     Organizational Unit Name: tech 			
+     Common Name: yyc					//好记的名字
+     Email Address: yycnet@163.com			//email
+     
+命令运行成功后在openssl.exe目录下会生成两个文件 cacert.pem cakey.pem
+分别是自签名的根证书和证书私钥文件
+把cakey.pem 拷贝到demoCA\private目录下, 把cacert.pem拷贝到demoCA目录下
+
+注意: 用本CA制作签名证书时输入的organizationName要和根证书的organizationName相同
+否则用根证书签名时会报下列错误
+The organizationName field needed to be the same in the
+CA certificate (casoft) and the request (casoftX)
+
+三、通过CA签发服务器证书
+假如你有支持SSL的服务，那么你需要制作服务器证书，并用本CA进行签名
+1、先生成服务端私钥
+openssl genrsa -des3 -out server.key 1024
+输入下列信息：
+     Enter pass phrase for server.key：123456		//证书的密码
+2、服务端证书了，先生成一个csr文件(Certificate Signing Request). 
+openssl req -new -key server.key -out server.csr -config openssl.cnf
+生成CSR的时候屏幕上将有提示,依照其指示一步一步输入要求的信息即可.
+Common Name:那一项要输入服务器的域名或IP
+3、对生成的服务器CSR进行CA认证签名
+openssl ca -in server.csr -out server.pem -config openssl.cnf
+注: 生成的server.pem证书中包括一些可显示信息，可删掉，不影响证书文件
+至此服务器端证书生成并签名完毕
+如果要把pem格式证书转化为x509格式，输入如下命令
+openssl x509 -in server.pem -out server.cer
+
+当然你也可用IIS WEB SERVER产生一个证书申请certreq.txt
+打开IIS WEB SERVER——〉站点属性——〉目录安全性——〉服务器证书——〉创建一个新证书——〉现在准备请求，但稍候发送——〉
+     命名和安全设置：名称：server,位长：1024
+     组织信息：组织：casoft，组织部门：xxxx1xxx
+     站点的公用名称：网站名称（或者服务器端的ip）
+     地理信息：国家：CN,省市：beijing，市：bj(注意一定要与先前的根证书相同，否则签名的时候会出错误)
+     生成certreq.txt。
+对证书申请进行CA签名。
+openssl ca -in certreq.txt -out server.pem –config \openssl.cnf
+     
+四、通过CA签发客户证书
+步骤和生成服务端证书一样，仿照输入即可
+1、先生成私钥
+openssl genrsa -des3 -out client.key 1024
+2、生成客户端csr文件(Certificate Signing Request). 
+openssl req -new -key client.key -out client.csr -config openssl.cnf
+3、生成客户端CA签名证书
+openssl ca -in client.csr -out client.pem -config openssl.cnf
+
+如果要将客户端PEM证书转换为其他格式运行如下命令:
+如果要把pem格式证书转化为x509格式
+openssl x509 -in client.pem -out client.cer
+转化为pkcs12格式的证书
+openssl pkcs12 -export -in client.pem -inkey client.key -out client.p12
+
+五、回收某证书
+如果想撤销某个本CA签发的证书(你也可以从demoCA/newcerts找到要撤销的证书备份文件)
+openssl ca -gencrl -revoke xxxx.pem -out list.crl -config openssl.cnf
+
+重新生成CRL文件
+openssl ca -gencrl -out list.crl -config openssl.cnf
+
+!!!CRL也有过期时间，如果不指定-crldays参数则默认是1天
+如果CRL参数过期要注意重新生成
+

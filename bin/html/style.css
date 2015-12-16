@@ -1,0 +1,94 @@
+TD {	FONT-FAMILY: "ËÎÌו"; FONT-SIZE: 9pt}
+TH {	FONT-FAMILY: "ËÎÌו"; FONT-SIZE: 9pt}
+BODY {	FONT-FAMILY: "ËÎÌו"; FONT-SIZE: 9pt}
+
+.btnUP 
+ { 
+ 	BACKGROUND-COLOR: Silver; 
+ 	BORDER-BOTTOM: #996600 solid 1px; 
+ 	BORDER-LEFT: #FFFFFF solid 1px; 
+ 	BORDER-RIGHT: #996600 solid 1px; 
+ 	BORDER-TOP: #FFFFFF solid 1px; 
+ 	color:#000000; 
+ 	FONT-FAMILY: 'Arial'; 
+ 	FONT-SIZE: 9pt; 
+ 	cursor:hand 
+  } 
+.btnDown 
+{ 
+     BACKGROUND-COLOR: Silver; 
+     BORDER-BOTTOM: #FFFFFF solid 1px; 
+     BORDER-LEFT: #996600 solid 1px; 
+     BORDER-RIGHT: #FFFFFF solid 1px; 
+     BORDER-TOP: #996600 solid 1px; 
+     color:#000000; 
+     FONT-FAMILY: 'Arial'; 
+     FONT-SIZE: 9pt; 
+     cursor:hand 
+} 
+.btnOff 
+{ 
+     BACKGROUND-COLOR: Silver; 
+     BORDER-BOTTOM:  solid 0px; 
+     BORDER-LEFT:  solid 0px; 
+     BORDER-RIGHT: solid 0px; 
+     BORDER-TOP:  solid 0px; 
+     color:#000000; 
+     FONT-FAMILY: 'Arial'; 
+     FONT-SIZE: 9pt; 
+     CURSOR: hand; 
+}
+.txtInput_normal
+{ 
+	 BORDER-BOTTOM: green solid 1pt; 
+ 	 BORDER-LEFT: green solid 1pt; 
+ 	 BORDER-RIGHT: green solid 1pt; 
+ 	 BORDER-TOP: green solid 1pt; 
+ 	 FONT-FAMILY: 'Arial'; 
+ 	 FONT-SIZE: 9pt;
+ 	 background: Sliver;
+ 	 COLOR: blue; 
+ 	 CURSOR: hand;
+ 	 overflow: auto;
+ 	 HEIGHT: 100%; 
+ 	 WIDTH:  100%;
+ 	 MARGIN-TOP: 0pt;
+}
+.txtInput_none
+{ 
+	 BORDER-BOTTOM: 0pt; 
+ 	 BORDER-LEFT: 0pt; 
+ 	 BORDER-RIGHT: 0pt; 
+ 	 BORDER-TOP: 0pt; 
+ 	 FONT-FAMILY: 'Arial'; 
+ 	 FONT-SIZE: 9pt;
+ 	 background: transparent;
+ 	 CURSOR: hand;
+ 	 overflow: hidden;
+ 	 HEIGHT: 100%; 
+ 	 WIDTH:  100%;
+ 	 MARGIN-TOP: 0pt;
+}
+.txtInput_n
+{
+	 BORDER-BOTTOM: 0pt; 
+ 	 BORDER-LEFT: 0pt; 
+ 	 BORDER-RIGHT: 0pt; 
+ 	 BORDER-TOP: 0pt; 
+ 	 FONT-FAMILY: 'Arial'; 
+ 	 FONT-SIZE: 9pt;
+ 	 background: transparent;
+ 	 MARGIN-TOP: 0pt;
+}
+.txtInput_b
+{
+	 BORDER-BOTTOM: green solid 1pt; 
+ 	 BORDER-LEFT: green solid 1pt; 
+ 	 BORDER-RIGHT: green solid 1pt; 
+ 	 BORDER-TOP: green solid 1pt; 
+ 	 FONT-FAMILY: 'Arial'; 
+ 	 FONT-SIZE: 9pt;
+ 	 background: transparent;
+ 	 CURSOR: hand;
+ 	 MARGIN-TOP: 0pt;
+}

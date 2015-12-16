@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><title>UPnP_add</title>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<SCRIPT LANGUAGE=javascript src="common.js"></SCRIPT>
+<script language="javascript">
+//有效性检查
+function chkvalid()
+{
+	var rets="param=upnp ";
+	
+	if(document.getElementById("ptype0").checked)
+		rets=rets+"type=TCP ";
+	else rets=rets+"type=UDP ";
+	
+	var sip=document.getElementById("lblHost").value;
+	var sport=document.getElementById("lblPort").value;
+	sip=sip+":"+sport;
+	var re_sip=/^((\w+.?)+:\d+,?)+$/;
+	if( !re_sip.test(sip) )
+	{
+		alert("要映射得内网服务地址和端口输入不正确"); 
+		document.getElementById("lblHost").focus();
+		return "";
+	}else rets=rets+"appsvr="+sip+" ";
+	
+	var mport=document.getElementById("lblMapped").value;
+	if(mport=="" || mport=="0") mport=sport;
+	var re_mport=/^\d*$/;
+	if(!re_mport.test(mport))
+	{
+		alert("请输入合法的映射端口");
+		document.getElementById("lblMapped").focus();
+		return "";
+	}else rets=rets+"mport="+mport+" ";
+	
+	var appdesc=document.getElementById("lblDesc").value;
+	var re_desc=/^[^&]*$/;
+	if(!re_desc.test(appdesc))
+	{
+		alert("描述中不允许包含&字符");
+		document.getElementById("lblDesc").focus();
+		return "";
+	}else rets=rets+"appdesc=\""+appdesc+"\"\r\n";
+	
+	return rets;
+}
+
+function upnp_add()
+{
+	var strEncode=chkvalid();
+	if(strEncode=="") return;
+
+	window.event.returnValue=false;
+	window.returnValue=strEncode;
+	window.close();
+}
+
+</script>
+</HEAD>
+<body bgColor=silver style="overflow:hidden;">
+<br>
+<table WIDTH=100%  height=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<tr><td>&nbsp;
+协议类型: 
+<input type=radio value="TCP" name=ptype id=ptype0 checked>TCP
+&nbsp;
+<input type=radio value="UDP" name=ptype id=ptype1 >UDP
+</td></tr>
+<tr><td>&nbsp;
+内网地址: <input id=lblHost type=text class="txtInput_b" >
+</td></tr>
+<tr><td>&nbsp;
+内网端口: <input id=lblPort type=text class="txtInput_b" >
+</td></tr>
+<tr><td>&nbsp;
+映射端口: <input id=lblMapped type=text class="txtInput_b" >
+</td></tr>
+<tr><td>&nbsp;
+服务描述: <input id=lblDesc type=text class="txtInput_b">
+</td></tr>
+<tr><td>
+<hr>
+</td></tr>
+<tr><td align=center>
+<input type=button  id=btnOK value="新 增" onclick="javascript:upnp_add();" >
+</td></tr>
+<tr><td>&nbsp;</td></tr>
+</table>
+</body>
+</HTML>

@@ -1,0 +1,77 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<SCRIPT LANGUAGE=javascript src="common.js"></SCRIPT>
+<SCRIPT LANGUAGE=javascript src="upnp.js"></SCRIPT>
+</HEAD>
+<body onload="window_onload()" >
+<br>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 align="center">
+<tr bgcolor="#e5e5e5" height=25px>
+<td width="500px">
+&nbsp;<B>UPnP 设备:</B>
+<span id=lblHelp></span>
+</td>
+<td width=120px align=right>
+<input id=btnStatus type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="刷新" onclick="javascript:upnp_status();">
+<input id=btnFind type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="查找" onclick="javascript:upnp_find();">
+<input id=btnStop type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' DISABLED
+ onmouseover='javascript:this.className="btnUP";' value="停止" onclick="javascript:upnp_stop();">
+</td><tr>
+<tr><td colspan=2>
+&nbsp;&nbsp;&nbsp;&nbsp;外网 IP:
+<span id=lblWanIP> </span>
+&nbsp;&nbsp;&nbsp;&nbsp;设备名称/厂商:
+<span id=lblDevName> </span>
+
+</td></tr>
+<tr><td colspan=2><hr></td></tr>
+
+
+<tr bgcolor="#e5e5e5" height=25px>
+<td >
+&nbsp;<B>映射服务列表:</B>
+<span id=lblItem></span>
+</td>
+<td width=120px align=right>
+<input id=btnAdd type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="新增" onclick="javascript:upnp_add();">
+ &nbsp;
+<input id=btnDel type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="删除" onclick="javascript:upnp_del();">
+</td><tr>
+
+<tr >
+<td colspan=2>
+ <xml id="upnpXML" src="fmap_upnp" onreadystatechange="javascript:showPopup(250, 200, 150, 20);" ondatasetcomplete="javascript:hidePopup();"></xml>
+ <table id=tblMaplist name=tblMaplist datasrc="#upnpXML" width=100% BORDER=1 CELLSPACING=0 CELLPADDING=0>
+ <THEAD>
+ <tr height=18px bgColor="Silver">
+ <th width=50px >类型</th>
+ <th width=80px >外网端口</th>
+ <th width=80px >内网端口</th>
+ <th width=100px >内网地址</th>
+ <th >服务描述</th>
+ <th width=50px >状态</th>
+ </tr><THEAD>
+ <TBODY>
+ <tr onmousemove="javascript:this.style.background='#e5e5e5';" onmouseout="javascript:this.style.background='#ffffff';" 
+  onclick="javascript:itemClick(this);" style="cursor:hand;">
+ <td align=center ><span datafld="ptype" ></span></td>
+ <td align=center ><span datafld="wport" ></span></td>
+ <td align=center ><span datafld="lport" ></span></td>
+ <td align=center ><span datafld="laddr" ></span></td>
+ <td align=center ><span datafld="desc" ></span></td>
+ <td align=center onclick="javascript: errorDesc(this.parentElement);"><U><span datafld="result" ></span></U></td>
+ </tr>
+ </table>
+<br>
+注:如果配置了UPnP端口映射，那么程序启动时会自动搜索UPnP设备并映射否则不进行UPnP设备搜索.
+</td></tr>
+
+</table>
+</BODY>
+</HTML>

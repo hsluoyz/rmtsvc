@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "net4cpp21", "net4cpp21\net4cpp21.vcproj", "{E02C69C4-B8D9-4889-B3C4-8C349B65856F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rmtsvc", "rmtsvc.vcproj", "{91F4EAC4-B26E-4843-957F-6EBE4080040C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vIDC", "Libs\vIDC\vIDC.vcproj", "{DFA677C2-4D71-4E65-8E4D-1743477DD39F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		nossl Release|Win32 = nossl Release|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E02C69C4-B8D9-4889-B3C4-8C349B65856F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E02C69C4-B8D9-4889-B3C4-8C349B65856F}.Debug|Win32.Build.0 = Debug|Win32
+		{E02C69C4-B8D9-4889-B3C4-8C349B65856F}.nossl Release|Win32.ActiveCfg = nossl Release|Win32
+		{E02C69C4-B8D9-4889-B3C4-8C349B65856F}.nossl Release|Win32.Build.0 = nossl Release|Win32
+		{E02C69C4-B8D9-4889-B3C4-8C349B65856F}.Release|Win32.ActiveCfg = Release|Win32
+		{E02C69C4-B8D9-4889-B3C4-8C349B65856F}.Release|Win32.Build.0 = Release|Win32
+		{91F4EAC4-B26E-4843-957F-6EBE4080040C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{91F4EAC4-B26E-4843-957F-6EBE4080040C}.Debug|Win32.Build.0 = Debug|Win32
+		{91F4EAC4-B26E-4843-957F-6EBE4080040C}.nossl Release|Win32.ActiveCfg = Release|Win32
+		{91F4EAC4-B26E-4843-957F-6EBE4080040C}.nossl Release|Win32.Build.0 = Release|Win32
+		{91F4EAC4-B26E-4843-957F-6EBE4080040C}.Release|Win32.ActiveCfg = Release|Win32
+		{91F4EAC4-B26E-4843-957F-6EBE4080040C}.Release|Win32.Build.0 = Release|Win32
+		{DFA677C2-4D71-4E65-8E4D-1743477DD39F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DFA677C2-4D71-4E65-8E4D-1743477DD39F}.Debug|Win32.Build.0 = Debug|Win32
+		{DFA677C2-4D71-4E65-8E4D-1743477DD39F}.nossl Release|Win32.ActiveCfg = Release|Win32
+		{DFA677C2-4D71-4E65-8E4D-1743477DD39F}.nossl Release|Win32.Build.0 = Release|Win32
+		{DFA677C2-4D71-4E65-8E4D-1743477DD39F}.Release|Win32.ActiveCfg = Release|Win32
+		{DFA677C2-4D71-4E65-8E4D-1743477DD39F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

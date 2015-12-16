@@ -1,0 +1,9 @@
+bin目录下包含rmtsvc编译所需的lib库文件
+jpeg-d.lib debug版的multithreaded方式编译的JPEG库
+jpeg-r.lib release版的multithreaded方式编译的JPEG库
+jpeg-r-dll.lib release版的multithreaded dll方式编译的JPEG库
+
+net4cpp21.lib release版的multithreaded dll方式编译的网络库
+net4cpp21_nossl.lib release版的multithreaded dll方式编译的不支持SSL加密的网络库
+
+vIDC.lib release版的multithreaded dll方式编译的vidc库

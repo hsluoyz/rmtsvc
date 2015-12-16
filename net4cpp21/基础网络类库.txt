@@ -1,0 +1,23 @@
+
+net4cpp21 Õ¯¬Á¿‡πÿœµÕº
+***********************socket*****************************
+
+                     socketBase
+                         |
+     |-----------------------------------------|
+     |                   |                     |
+ socketRaw           socketUdp            socketTcp-----|
+     |                   |                     |        |
+     |                   |                     |        |
+ |--------|          dnsClient            socketSSL     |
+ |        |                                    |________|
+socketIcmp                                     |        
+                          |------------------------------|
+                          |                              |
+                      socketSvr                     socketProxy
+                          |                              |
+                          |                              |
+          |--------------------------|        |-----------------------------|   
+                |         |          |        |          |          |
+                |         |          |        |          |          |
+            httpServer ftpServer smtpServer smtpClient ftpClient httpClient

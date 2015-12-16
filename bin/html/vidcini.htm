@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<SCRIPT LANGUAGE=javascript src="common.js"></SCRIPT>
+<SCRIPT LANGUAGE=javascript>
+
+function processRequest() 
+{
+	if (xmlHttp.readyState == 4) { // 判断对象状态
+		if (xmlHttp.status == 200) { // 信息已经成功返回，开始处理信息
+			
+			var xmlobj = xmlHttp.responseXML;
+			var node=xmlobj.getElementsByTagName("settings");
+			if(node.length>0) 
+				document.getElementById("txtSetings").value=node.item(0).text;
+			
+			var retmsg=xmlobj.getElementsByTagName("retmsg");
+    			if(retmsg.length>0)
+				alert(retmsg.item(0).text);
+            	} //else alert("请求的页面有异常,status="+xmlHttp.status);
+            	hidePopup();
+        }
+}
+
+function window_onload()
+{
+	if(!oPopup) createpopup();   	
+	if(!xmlHttp) createXMLHttpRequest();
+}
+
+function backOUT()
+{
+	showPopup(250, 200, 150, 20);
+	xmlHttp.open("GET", "/vidcini?cmd=out", true);
+	xmlHttp.onreadystatechange = processRequest;
+	xmlHttp.send( null );
+}
+
+function backIN()
+{
+	if(document.getElementById("txtSetings").value=="") return;
+	showPopup(250, 200, 150, 20);
+	var strEncode="ini="+document.getElementById("txtSetings").value;
+	strEncode=strEncode.replace(/&/g,"%26");
+	xmlHttp.open("POST", "/vidcini?cmd=in", true);
+	xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=utf-8");
+	xmlHttp.onreadystatechange = processRequest;
+	xmlHttp.send( strEncode );
+}
+
+</SCRIPT>
+</HEAD>
+<body onload="window_onload()" >
+<br>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 align="center">
+<tr bgcolor="#e5e5e5" height=25px>
+<td width="500px">
+&nbsp;<B>vIDC配置参数:<B>
+</td>
+<td width=100px>
+<input id=btnInput type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="导 入" onclick="javascript:backIN();">
+<input id=btnOutput type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";'  
+ onmouseover='javascript:this.className="btnUP";' value="导 出" onclick="javascript:backOUT();"> 
+</td><tr>
+
+<tr>
+<td colspan=2>
+<TEXTAREA id=txtSetings class="txtInput_b" ROWS=25 style="width:600px;"></TEXTAREA>
+</td></tr>
+
+</table>
+</BODY>
+</HTML>

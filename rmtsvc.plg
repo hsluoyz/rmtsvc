@@ -1,0 +1,116 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: rmtsvc - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x804 /fo"Release/Script1.res" /d "NDEBUG" "D:\yyc\oRmtsvc\Script1.rc"" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPEF.tmp" with contents
+[
+/nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /FR"Release/" /Fp"Release/rmtsvc.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"D:\yyc\oRmtsvc\cInjectDll.cpp"
+"D:\yyc\oRmtsvc\execCommand.cpp"
+"D:\yyc\oRmtsvc\other\findpassword.cpp"
+"D:\yyc\oRmtsvc\ftpserver.cpp"
+"D:\yyc\oRmtsvc\ftpserver_ini.cpp"
+"D:\yyc\oRmtsvc\other\getSysusage.cpp"
+"D:\yyc\oRmtsvc\other\IPF.cpp"
+"D:\yyc\oRmtsvc\NTService.cpp"
+"D:\yyc\oRmtsvc\parseCommand.cpp"
+"D:\yyc\oRmtsvc\proxyserver.cpp"
+"D:\yyc\oRmtsvc\proxyserver_ini.cpp"
+"D:\yyc\oRmtsvc\rmtsvc.cpp"
+"D:\yyc\oRmtsvc\ShellCommandEx.cpp"
+"D:\yyc\oRmtsvc\startProcessAsUser.cpp"
+"D:\yyc\oRmtsvc\other\stringMatch.cpp"
+"D:\yyc\oRmtsvc\telnetserver.cpp"
+"D:\yyc\oRmtsvc\Libs\vIDC\webI\vidcManager.cpp"
+"D:\yyc\oRmtsvc\Libs\vIDC\webI\vidcManager_ini.cpp"
+"D:\yyc\oRmtsvc\webAction.cpp"
+"D:\yyc\oRmtsvc\webAction_fport.cpp"
+"D:\yyc\oRmtsvc\webAction_fview.cpp"
+"D:\yyc\oRmtsvc\webAction_pview.cpp"
+"D:\yyc\oRmtsvc\webAction_rview.cpp"
+"D:\yyc\oRmtsvc\webAction_sview.cpp"
+"D:\yyc\oRmtsvc\webAction_upnp.cpp"
+"D:\yyc\oRmtsvc\Libs\vIDC\webI\webAction_vidc.cpp"
+"D:\yyc\oRmtsvc\websvr.cpp"
+"D:\yyc\oRmtsvc\other\Wutils.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPEF.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPF0.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:no /pdb:"Release/rmtsvc.pdb" /machine:I386 /out:"bin/rmtsvc.exe" 
+.\Release\cInjectDll.obj
+.\Release\execCommand.obj
+.\Release\findpassword.obj
+.\Release\ftpserver.obj
+.\Release\ftpserver_ini.obj
+.\Release\getSysusage.obj
+.\Release\IPF.obj
+.\Release\NTService.obj
+.\Release\parseCommand.obj
+.\Release\proxyserver.obj
+.\Release\proxyserver_ini.obj
+.\Release\rmtsvc.obj
+.\Release\ShellCommandEx.obj
+.\Release\startProcessAsUser.obj
+.\Release\stringMatch.obj
+.\Release\telnetserver.obj
+.\Release\vidcManager.obj
+.\Release\vidcManager_ini.obj
+.\Release\webAction.obj
+.\Release\webAction_fport.obj
+.\Release\webAction_fview.obj
+.\Release\webAction_pview.obj
+.\Release\webAction_rview.obj
+.\Release\webAction_sview.obj
+.\Release\webAction_upnp.obj
+.\Release\webAction_vidc.obj
+.\Release\websvr.obj
+.\Release\Wutils.obj
+.\Release\Script1.res
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPF0.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+cInjectDll.cpp
+execCommand.cpp
+findpassword.cpp
+ftpserver.cpp
+ftpserver_ini.cpp
+getSysusage.cpp
+IPF.cpp
+NTService.cpp
+parseCommand.cpp
+proxyserver.cpp
+proxyserver_ini.cpp
+rmtsvc.cpp
+ShellCommandEx.cpp
+startProcessAsUser.cpp
+stringMatch.cpp
+telnetserver.cpp
+vidcManager.cpp
+vidcManager_ini.cpp
+webAction.cpp
+webAction_fport.cpp
+webAction_fview.cpp
+webAction_pview.cpp
+webAction_rview.cpp
+webAction_sview.cpp
+webAction_upnp.cpp
+webAction_vidc.cpp
+websvr.cpp
+Wutils.cpp
+Linking...
+
+
+
+<h3>Results</h3>
+rmtsvc.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

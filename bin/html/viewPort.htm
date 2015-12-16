@@ -1,0 +1,76 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<SCRIPT LANGUAGE=javascript src="common.js"></SCRIPT>
+<SCRIPT LANGUAGE=javascript src="viewPort.js"></SCRIPT>
+</HEAD>
+<body onload="window_onload()" style="overflow:hidden;">
+<table WIDTH=100%  height=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+
+<tr height=25px>
+<td>
+&nbsp;<b>端口进程列表</b>&nbsp;
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="刷新列表" onclick="javascript:fportXML.src='/fport';">
+ &nbsp;&nbsp;
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="结束进程" onclick="javascript:pkill();">
+ &nbsp;&nbsp;
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="进程属性" onclick="javascript:proFile();">
+ &nbsp;&nbsp;当前进程ID：<span id="lblProcess" name="lblProcess">
+</td>
+</tr>
+
+<tr>
+<td valign=top width=100%>
+ <div style="height:100%;width:100%;overflow:auto;" >
+ <xml id="fportXML" src="fport" onreadystatechange="javascript:showPopup(250, 200, 150, 20);" ondatasetcomplete="javascript:hidePopup();"></xml>
+ <table id=tblProcess name=tblProcess datasrc="#fportXML" BORDER=0 CELLSPACING=0 CELLPADDING=0>
+ <THEAD>
+ <tr height=18px bgColor="Silver">
+ <th width=20px> &nbsp; </th>
+ <th width=50px style="cursor:hand" onclick="sort('fportXML','fportStyle','ptype');"> <u>协议</u> </th>
+ <th width=50px style="cursor:hand" onclick="sort('fportXML','fportStyle','pid');"> <u>进程ID</u> </th>
+ <th width=150px style="cursor:hand" onclick="sort('fportXML','fportStyle','laddr');"> <u>本地地址</u> </th>
+ <th width=150px style="cursor:hand" onclick="sort('fportXML','fportStyle','raddr');"> <u>远程地址</u> </th>
+ <th width=80px style="cursor:hand" onclick="sort('fportXML','fportStyle','status');"> <u>状态</u> </th>
+ <th width=200px> 进程名称 </th>
+ </tr><THEAD>
+ <TBODY>
+ <tr onmousemove="javascript:this.style.background='#e5e5e5';" onmouseout="javascript:this.style.background='#ffffff';" 
+  onclick="javascript:processClick(this);" style="cursor:hand;">
+ <td align=center ><span datafld="id" ></span></td>
+ <td align=center ><span datafld="ptype" ></span></td>
+ <td align=center ><span datafld="pid" ></span></td>
+ <td >&nbsp;&nbsp;&nbsp;&nbsp;<span datafld="laddr" ></span></td>
+ <td >&nbsp;&nbsp;<span datafld="raddr" ></span></td>
+ <td >&nbsp;&nbsp;<span datafld="status" ></span></td>
+ <td >&nbsp;&nbsp;<span datafld="pname" ></span></td>
+ </tr>
+ <TBODY></table>
+ </div>
+</td>
+</tr>
+
+</table>
+
+<xml id="fportStyle"> 
+<xmlroot> 
+<xsl:for-each select="fport" order-by="+ptype" xmlns:xsl="http://www.w3.org/TR/WD-xsl"> 
+<fport> 
+<id><xsl:value-of select="id"/></id>
+<ptype><xsl:value-of select="ptype"/></ptype>
+<pid><xsl:value-of select="pid"/></pid> 
+<pname><xsl:value-of select="pname"/></pname>
+<laddr><xsl:value-of select="laddr"/></laddr> 
+<raddr><xsl:value-of select="raddr"/></raddr> 
+<status><xsl:value-of select="status"/></status>  
+</fport> 
+</xsl:for-each> 
+</xmlroot> 
+</xml> 
+
+</BODY>
+</HTML>

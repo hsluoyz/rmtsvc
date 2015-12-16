@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>middle</title>
+<SCRIPT language=javascript>
+function Submit_onclick()
+{
+if(parent.myFrames.cols=="180,12,0,*")
+{
+	parent.myFrames.cols="0,12,0,*";
+	document.getElementById("ImgArrow").innerText="¡ú o p  e n ¡ú";
+}else{
+	parent.myFrames.cols="180,12,0,*";
+	document.getElementById("ImgArrow").innerText="¡û c l o s e ¡û";
+}
+}
+</SCRIPT>
+</head>
+<body topmargin="0" leftmargin="0" bgcolor="#CEE5FF" >
+ <TABLE cellSpacing="0" cellPadding="0" width="12" border="0" height="100%">
+ <tr>
+	<td width="12" bgcolor=Silver></td>
+ </tr>
+<tr>
+	<td id=ImgArrow height="122" width="12" align=center style="cursor:hand;" onclick="javascript:Submit_onclick()">
+	¡û c l o s e ¡û
+	</td>
+</tr>
+<tr>
+	<td width="12" bgcolor=Silver></td>
+</tr>
+</TABLE>
+</body>
+</html>

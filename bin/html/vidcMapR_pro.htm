@@ -1,0 +1,106 @@
+<HTML>
+<HEAD><title>vIDCs属性</title>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<SCRIPT LANGUAGE=javascript src="common.js"></SCRIPT>
+<script language="javascript">
+function window_onload()
+{
+	var vidcsname=window.dialogArguments;
+	var qx=0;
+	var p=vidcsname.indexOf(',');
+	if(p!=-1)
+	{
+		qx=vidcsname.substr(0,p);
+		vidcsname=vidcsname.substr(p+1);
+	}
+	if((qx & ACCESS_VIDC_ADMIN)==ACCESS_VIDC_ADMIN)
+		document.all("btnOK").disabled=false;
+	if(vidcsname!=""){
+		var vhost="";
+		var vport=0;
+		var vpswd="";
+		var vconn=0;
+		if( (p=vidcsname.indexOf(','))!=-1)
+		{
+			vhost=vidcsname.substr(0,p);
+			vidcsname=vidcsname.substr(p+1);
+			if( (p=vidcsname.indexOf(','))!=-1)
+			{
+				vport=vidcsname.substr(0,p);
+				vidcsname=vidcsname.substr(p+1);
+				if( (p=vidcsname.indexOf(','))!=-1)
+				{
+					vpswd=vidcsname.substr(0,p);
+					vidcsname=vidcsname.substr(p+1);
+					if( (p=vidcsname.indexOf(','))!=-1)
+					{
+						vconn=vidcsname.substr(0,p);
+						vidcsname=vidcsname.substr(p+1);
+					}
+				}
+			}
+		}
+		 document.all("lblName").disabled=true;
+		 document.all("lblName").value=vidcsname; 
+		 document.all("lblHost").value=vhost;
+		 document.all("lblPort").value=vport;
+		 document.all("lblPswd").value=vpswd;
+		 if(vconn==1)
+		 	document.all("chkAutoconn").checked=true;
+		 else	document.all("chkAutoconn").checked=false;
+	}
+}
+function mdProperty()
+{
+	var sip=document.getElementById("lblHost").value;
+	var sport=document.getElementById("lblPort").value;
+	sip=sip+":"+sport;
+	var re_sip=/^(\w+.?)+:\d+$/;
+	if( !re_sip.test(sip) )
+	{
+		alert("错误的vIDCs服务的地址或端口"); 
+		document.getElementById("lblHost").focus();
+		return;
+	}
+	var param="vname="+document.all("lblName").value;
+	param=param+"&vhost="+document.all("lblHost").value;
+	param=param+"&vport="+document.all("lblPort").value;
+	param=param+"&vpswd="+document.all("lblPswd").value;
+	if(document.all("chkAutoconn").checked)
+		param=param+"&vconn=1";
+	else	param=param+"&vconn=0";
+	window.event.returnValue=false;
+	window.returnValue=param;
+	window.close();
+}
+</script>
+</HEAD>
+<body bgColor=silver onload="window_onload()" style="overflow:hidden;">
+<br>
+<table datasrc="#profileXML"  WIDTH=100%  height=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<tr><td>&nbsp;
+名称/标签: <input id=lblName type=text class="txtInput_b" MAXLENGTH=40>
+</td></tr>
+<tr><td>&nbsp;
+vIDCs地址: <input id=lblHost type=text class="txtInput_b" >
+</td></tr>
+<tr><td>&nbsp;
+vIDCs端口: <input id=lblPort type=text class="txtInput_b" >
+</td></tr>
+<tr><td>&nbsp;
+访问 密码: <input id=lblPswd type=text class="txtInput_b" MAXLENGTH=20>
+</td></tr>
+<tr><td>&nbsp;
+<input type=checkbox value=1 id=chkAutoconn >程序运行后是否自动连接本vIDCs
+</td></tr>
+<tr><td>
+<hr>
+</td></tr>
+<tr><td align=center>
+<input type=button  id=btnOK value="保 存" onclick="javascript:mdProperty();" disabled >
+</td></tr>
+<tr><td>&nbsp;</td></tr>
+</table>
+</body>
+</HTML>

@@ -1,0 +1,42 @@
+<HTML>
+<HEAD><title>驱动器属性</title>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<SCRIPT LANGUAGE=javascript src="common.js"></SCRIPT>
+<SCRIPT LANGUAGE=javascript src="proDrive.js"></SCRIPT>
+</HEAD>
+<body bgColor=silver onload="window_onload()" style="overflow:hidden;">
+<br>
+<xml id="prodriveXML" ></xml>
+<table datasrc="#prodriveXML"  WIDTH=100%  height=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<tr><td>&nbsp;&nbsp;
+名&nbsp;&nbsp;&nbsp;&nbsp;称: &nbsp;&nbsp; <span id="fname" ></span>
+</td></tr>
+<tr><td>&nbsp;&nbsp;
+类&nbsp;&nbsp;&nbsp;&nbsp;型: &nbsp;&nbsp; <span id="ftype" ></span>
+</td></tr>
+<tr><td>&nbsp;&nbsp;
+卷&nbsp;&nbsp;&nbsp;&nbsp;标: &nbsp;&nbsp; <input type=text class="txtInput_n" id="fvolu" value="" disabled > 
+&nbsp;<input type=button  id=btnApply value=" 更改 " onclick="javascript:mdVolu();" disabled >
+</td></tr>
+<tr><td>&nbsp;&nbsp;
+文件系统: &nbsp;&nbsp; <span id="fsyst" ></span>
+</td></tr>
+<tr><td>
+<hr>
+</td></tr>
+<tr><td>&nbsp;&nbsp;
+已用空间: &nbsp;&nbsp; <span id="fused" ></span>
+</td></tr>
+<tr><td>&nbsp;&nbsp;
+可用空间: &nbsp;&nbsp; <span id="ffree" ></span>
+</td></tr>
+<tr><td>&nbsp;&nbsp;
+容&nbsp;&nbsp;&nbsp;&nbsp;量: &nbsp;&nbsp; <span id="fsize" ></span>
+</td></tr>
+<tr><td>
+<hr>
+</td></tr>
+</table>
+</body>
+</HTML>

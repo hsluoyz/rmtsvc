@@ -1,0 +1,35 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<SCRIPT LANGUAGE=javascript src="common.js"></SCRIPT>
+<SCRIPT LANGUAGE=javascript>
+function window_onload()
+{
+	if(!xmlHttp) createXMLHttpRequest();
+	xmlHttp.open("GET", "/version", false);
+    	xmlHttp.send(null);
+    	document.all("lblVer").innerHTML=xmlHttp.responseText;
+}
+</SCRIPT>
+</HEAD>
+<body onload="window_onload()" >
+<br>
+<table border=0 width=100% CELLPADDING=0 CELLSPACING=0>
+<tr><td>&nbsp;<b>Software</b>:R & V</td><td>&nbsp;</td></tr>
+<tr><td>&nbsp;<b>Maker</b>:yyc &nbsp;</td></tr>
+<tr><td>&nbsp;<b>Version</b>:<span id=lblVer>2.5.X ?</span></td></tr>
+</table><br><br><font color=green size=3>
+&nbsp;&nbsp;&nbsp;Welcome to use rmtSvc,the solution for remote manager.
+you can get infomation about it from <a href='http://hi.baidu.com/yycblog/'>here</a>.
+please send <A href='mailto:yycnet@163.com'>mail</a>to me or submit it in my <a href='http://hi.baidu.com/yycblog/'>Blog</a>
+if you have any question or bugs.This is a free software tool.
+                                           </font><center><br><br><br>
+<H1>Welcome to RmtSvc & vIDC</H1><br><br><br><br><br>
+<hr><SPAN class=nava><FONT color=#000000 face='Arial, Helvetica, sans-serif'>
+Copyright (C) 2002 - 2010 yyc, All Rights Reserved
+</FONT><FONT color=#000000><BR>版权所有
+<FONT face='Arial, Helvetica, sans-serif'>yyc制作  (本版本不再支持MSN远控)</FONT>
+<BR></FONT></SPAN></center>
+</BODY>
+</HTML>

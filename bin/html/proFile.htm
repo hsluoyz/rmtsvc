@@ -1,0 +1,113 @@
+<HTML>
+<HEAD><title>文件属性</title>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<SCRIPT LANGUAGE=javascript src="common.js"></SCRIPT>
+<SCRIPT LANGUAGE=javascript src="proFile.js"></SCRIPT>
+</HEAD>
+<body bgColor=silver onload="window_onload()" style="overflow:hidden;">
+&nbsp;
+<span onclick="javascript:GetFileInfo();" class="btnUP">
+基本信息</span>
+&nbsp;&nbsp;&nbsp;
+<span onclick="javascript:GetVerInfo();" class="btnUP">
+版本信息</span>
+<br>
+
+<table id=divFileInfo name=divFileInfo style="width:100%;height:100%" BORDER=0 CELLSPACING=0 CELLPADDING=0>
+<tr><td width=100px>&nbsp;&nbsp;
+名&nbsp;&nbsp;&nbsp;&nbsp;称: &nbsp;&nbsp; </td><td>
+<span id="fname" ></span>
+</td></tr>
+<tr><td>&nbsp;&nbsp;
+文件类型: &nbsp;&nbsp; </td><td>
+<span id="ftype" ></span>
+</td></tr>
+<tr><td>&nbsp;&nbsp;
+打开方式: &nbsp;&nbsp; </td><td>
+<span id="opmode" ></span>
+</td></tr>
+<tr><td>&nbsp;&nbsp;
+位&nbsp;&nbsp;&nbsp;&nbsp;置: &nbsp;&nbsp; </td><td>
+<span id="fpath" ></span>
+</td></tr>
+<tr><td>&nbsp;&nbsp;
+大&nbsp;&nbsp;&nbsp;&nbsp;小: &nbsp;&nbsp; </td><td>
+<span id="fsize" ></span>
+</td></tr>
+<tr><td colspan=2>
+<hr>
+</td></tr>
+<tr><td>&nbsp;&nbsp;
+创建时间: &nbsp;&nbsp; </td><td>
+<span id="fctime" ></span>
+</td></tr>
+<tr><td>&nbsp;&nbsp;
+修改时间: &nbsp;&nbsp; </td><td>
+<span id="fmtime" ></span>
+</td></tr>
+<tr><td>&nbsp;&nbsp;
+访问时间: &nbsp;&nbsp; </td><td>
+<span id="fatime" ></span>
+</td></tr>
+<tr><td colspan=2>
+<hr>
+</td></tr>
+<tr><td colspan=2>&nbsp;&nbsp;
+属&nbsp;&nbsp;&nbsp;&nbsp;性: &nbsp;&nbsp;
+<input type=checkbox id=chkRead disabled >只读&nbsp;&nbsp;
+<input type=checkbox id=chkHide disabled >隐藏&nbsp;&nbsp;
+<input type=checkbox id=chkAchi disabled >存档&nbsp;&nbsp;
+&nbsp;<input type=button  id=btnApply value=" 更改 " onclick="javascript:mdProperty();" disabled >
+</td></tr>
+<tr><td colspan=2>
+<hr>
+</td></tr>
+</table>
+
+<table id=divVerInfo name=divVerInfo style="width:100%;height:100%;display:none" BORDER=0 CELLSPACING=0 CELLPADDING=0>
+
+<tr><td>&nbsp;&nbsp;
+文件版本: &nbsp;&nbsp; </td><td>
+<span id="ver_fver" ></span>
+</td></tr>
+
+<tr><td width=100px>&nbsp;&nbsp;
+说&nbsp;&nbsp;&nbsp;&nbsp;明: &nbsp;&nbsp; </td><td>
+<span id="ver_fdesc" ></span>
+</td></tr>
+
+<tr><td>&nbsp;&nbsp;
+版&nbsp;&nbsp;&nbsp;&nbsp;权: &nbsp;&nbsp; </td><td>
+<span id="ver_cpyr" ></span>
+</td></tr>
+
+<tr><td>&nbsp;&nbsp;
+公司名称: &nbsp;&nbsp; </td><td>
+<span id="ver_company" ></span>
+</td></tr>
+
+<tr><td>&nbsp;&nbsp;
+文件注释: &nbsp;&nbsp; </td><td>
+<span id="ver_comments" ></span>
+</td></tr>
+
+<tr><td>&nbsp;&nbsp;
+产品名称: &nbsp;&nbsp; </td><td>
+<span id="ver_pname" ></span>
+</td></tr>
+
+<tr><td>&nbsp;&nbsp;
+内部名称: &nbsp;&nbsp; </td><td>
+<span id="ver_intername" ></span>
+</td></tr>
+
+<tr><td>&nbsp;&nbsp;
+&nbsp;&nbsp; </td><td>
+<span> &nbsp; </span>
+</td></tr>
+
+</table>
+
+</body>
+</HTML>

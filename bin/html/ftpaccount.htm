@@ -1,0 +1,167 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<SCRIPT LANGUAGE=javascript src="common.js"></SCRIPT>
+<SCRIPT LANGUAGE=javascript src="ftpaccount.js"></SCRIPT>
+</HEAD>
+<body onload="window_onload()" >
+&nbsp;&nbsp;
+<A href="ftpsets.htm">FTP 状态</A>
+&nbsp;&nbsp;
+<A href="ftpaccount.htm">FTP 帐号</A> 
+&nbsp;&nbsp;
+<A href="ftpini.htm">导入/导出</A>
+<br>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 align="center">
+<tr bgcolor="#e5e5e5" height=25px>
+<td width="500px">
+&nbsp;<B>FTP帐号列表:<B>
+<select id=selAccount style="width:200px" onchange="javascript:user_change(this);">
+<option value="">选择帐号进行修改/删除</option>
+</select>
+<span id=lblHelp></span>
+</td>
+<td width=100px>
+&nbsp;
+</td><tr>
+
+<tr><td colspan=2><hr></td></tr>
+
+<tr bgcolor="#e5e5e5" height=25px>
+<td>
+&nbsp;<B>帐号信息:<B>
+</td>
+<td>
+<input id=btnSave type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="新增/修改" onclick="javascript:user_save();">
+<input id=btnDele type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";'  
+ onmouseover='javascript:this.className="btnUP";' value="删 除" onclick="javascript:user_dele();">
+</td><tr>
+
+<tr>
+<td colspan=2>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+帐 号 名:<input id=lblUser type=text class="txtInput_b"> &nbsp;&nbsp;&nbsp;&nbsp;(帐号不区分大小写)
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+帐号密码:<input id=lblPswd type=text class="txtInput_b"> &nbsp;&nbsp;&nbsp;&nbsp;(如果不设置密码则表示无需密码)
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+密码保护:<input type=radio value=0 name=chkPswdmode id=chkPswdmode0 checked>不加密
+<input type=radio value=1 name=chkPswdmode id=chkPswdmode1 >MD4
+<input type=radio value=2 name=chkPswdmode id=chkPswdmode2 >MD5
+&nbsp;&nbsp;(如果设了密码保护则FTP客户端也要相应设置)
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+帐号描述:<input id=lblDesc type=text class="txtInput_b" style="width:400px"> 
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+有效期限:<input id=lblExpired type=text class="txtInput_b" READONLY>(yyyy-mm-dd)
+<input type=checkbox value=1 id=chkExpired checked onclick="javascript:clkExpired(this);">永不过期
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+登陆限制:<input id=lblMaxSignin type=text class="txtInput_b" value="0"> &nbsp;&nbsp;&nbsp;&nbsp;(最多允许几个人使用此帐号同时登陆,0则不限)
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+上载限制:<input id=lblMaxUp type=text class="txtInput_b" value="0">KB/s (最大上载速度限制,0则不限制上载速度)
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+上载限制:<input id=lblMaxUpfile type=text class="txtInput_b" value="0">KB &nbsp;&nbsp;(限制上载文件大小,0则不限制上载大小)
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+下载限制:<input id=lblMaxDw type=text class="txtInput_b" value="0">KB/s (最大下载速度限制,0则不限制下载速度)
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+限制最大磁盘使用空间: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+允许最大可用空间:<input id=lblMaxDisk type=text class="txtInput_b" value="0">MB (0则不限制可用空间)
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+当前用户已用空间:<input id=lblUseDisk type=text class="txtInput_b" value="0">MB (0则没有使用任何空间)
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=checkbox value=1 id=chkDispHidden >显示隐藏的目录和文件
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=checkbox value=1 id=chkForbid >禁用此帐号
+<br>
+</td></tr>
+
+
+<tr bgcolor="#e5e5e5" height=25px>
+<td>
+&nbsp;<B>帐号访问权限:<B>
+</td>
+<td>&nbsp;
+</td><tr>
+
+<tr>
+<td colspan=2>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+主 目 录:<input id=lblRoot type=text class="txtInput_b"> &nbsp;&nbsp;&nbsp;&nbsp;(绝对物理路径,为空则可访问整个电脑)
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+访问权限:<input type=checkbox value=1 name=lAccess id=lAccess1 checked>文件读
+<input type=checkbox value=2 name=lAccess id=lAccess2 checked>写
+<input type=checkbox value=4 name=lAccess id=lAccess4 checked>删除
+<input type=checkbox value=8 name=lAccess id=lAccess8 >执行
+<input type=checkbox value=16 name=lAccess id=lAccess16 checked>目录List
+<input type=checkbox value=32 name=lAccess id=lAccess32 checked>创建
+<input type=checkbox value=64 name=lAccess id=lAccess64 checked>删除
+<input type=checkbox value=128 name=lAccess id=lAccess128 >禁止继承
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+虚 目 录:<select id=selVPath style="width:350px;" onchange="javascript:vpath_change(this);">
+<option value="" selected>选择虚目录修改/删除</option>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input id=btnVSave type="button" class="btnOff" value="新增/修改" onclick="javascript:vpath_save();">
+<input id=btnVDele type="button" class="btnOff" value="删 除" onclick="javascript:vpath_dele();">
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+虚目录名:<input id=lblVName type=text class="txtInput_b"> &nbsp;&nbsp;&nbsp;&nbsp;
+物理路径:<input id=lblVPath type=text class="txtInput_b"> 
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+访问权限:<input type=checkbox value=1 name=lVAccess id=lVAccess1 checked>文件读
+<input type=checkbox value=2 name=lVAccess id=lVAccess2 checked>写
+<input type=checkbox value=4 name=lVAccess id=lVAccess4 checked>删除
+<input type=checkbox value=8 name=lVAccess id=lVAccess8 >执行
+<input type=checkbox value=16 name=lVAccess id=lVAccess16 checked>目录List
+<input type=checkbox value=32 name=lAccess id=lVAccess32 checked>创建
+<input type=checkbox value=64 name=lVAccess id=lVAccess64 checked>删除
+<input type=checkbox value=128 name=lVAccess id=lVAccess128 >禁止继承
+</td></tr>
+
+
+<tr bgcolor="#e5e5e5" height=25px>
+<td>
+&nbsp;<B>IP 过滤:<B>
+</td>
+<td>&nbsp;
+</td><tr>
+
+<tr>
+<td colspan=2>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+访问许可:
+<input type=radio value=1 name=chkIPAccess id=chkIPAccess1 checked>允许访问
+<input type=radio value=0 name=chkIPAccess id=chkIPAccess0 >禁止访问
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+IP 地 址:<input id=lblIPAddr type=text class="txtInput_b" style="width:400px"> 
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+注:可输入多个IP地址,IP地址之间以逗号分割.IP地址支持*通配符号.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+例如: 192.168.0.12,192.169.1.*,192.166.*.5
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+*仅用来匹配IP地址4段号码中的一个段.下列写法不支持192.168.1.1*
+<br>
+</td></tr>
+
+</table>
+</BODY>
+</HTML>

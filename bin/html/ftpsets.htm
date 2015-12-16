@@ -1,0 +1,112 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<SCRIPT LANGUAGE=javascript src="common.js"></SCRIPT>
+<SCRIPT LANGUAGE=javascript src="ftpsets.js"></SCRIPT>
+</HEAD>
+<body onload="window_onload()" >
+&nbsp;&nbsp;
+<A href="ftpsets.htm">FTP 状态</A>
+&nbsp;&nbsp;
+<A href="ftpaccount.htm">FTP 帐号</A> 
+&nbsp;&nbsp;
+<A href="ftpini.htm">导入/导出</A> 
+<br>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 align="center">
+<tr bgcolor="#e5e5e5" height=25px>
+<td width="500px">
+&nbsp;<B>FTP服务状态:<B>
+</td>
+<td width=120px>
+<input id=btnRefresh type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";'
+ onmouseover='javascript:this.className="btnUP";' value="刷新" onclick="javascript:ftp_status();">
+&nbsp;<input id=btnStart type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' DISABLED
+ onmouseover='javascript:this.className="btnUP";' value="启动" onclick="javascript:ftp_start();">
+<input id=btnStop type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' DISABLED 
+ onmouseover='javascript:this.className="btnUP";' value="停止" onclick="javascript:ftp_stop();"> 
+</td><tr>
+
+<tr>
+<td colspan=2>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span id=lblStatus><font color=red>●</font>服务停止运行</span>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+服务器当前时间&nbsp;&nbsp;&nbsp;<span id=lblCurtime>YYYY年MM月DD日 hh:mm:ss</span>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+服务开始运行时间 <span id=lblRuntime>YYYY年MM月DD日 hh:mm:ss</span>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+当前共 <span id=lblConnected>0</span> 个用户连接到本服务<br>
+<br>
+</td></tr>
+
+<tr><td colspan=2><hr></td></tr>
+
+<tr bgcolor="#e5e5e5" height=25px>
+<td>
+&nbsp;<B>FTP服务设置:<B>
+</td>
+<td>
+<input id=btnSet type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="保存设置" onclick="javascript:ftp_sets();"> 
+</td><tr>
+
+<tr>
+<td colspan=2>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+TCP 端口:<input id=lblSvrport name=svrport type=text class="txtInput_b"> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+IP 地址:<select id=lblSvrip name=bindip ><option value="" selected>(全部未分配)</option></select>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+服务类型: 
+<input type=radio value=0 name=svrtype id=ftptype0 >常规服务
+<input type=radio value=1 name=svrtype id=ftptype1 >SSL加密服务
+&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=checkbox value=1 name=autorun id=chkAutorun >程序运行启动服务
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+注:<font color=blue>以上配置在下次启动FTP服务时才生效</font><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+最大连接:<input id=lblMaxconn name=maxconn type=text class="txtInput_b" value="不限"> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PASV端口范围:<input id=lblDataport name=dataport type=text class="txtInput_b" value="不限"> 
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+记录日志:
+<input type=checkbox value=1 name=logevent id=chkLog1 >登录
+<input type=checkbox value=2 name=logevent id=chkLog2 >退出
+<input type=checkbox value=4 name=logevent id=chkLog4 >上载
+<input type=checkbox value=8 name=logevent id=chkLog8 >下载
+<input type=checkbox value=16 name=logevent id=chkLog16 >删除文件
+<input type=checkbox value=32 name=logevent id=chkLog32 >删除目录
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+欢迎信息: (可写多行，每行以220-开始)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<TEXTAREA name=tips id=lblTips style="BORDER-BOTTOM: green solid 1pt;BORDER-LEFT: green solid 1pt;BORDER-RIGHT: green solid 1pt;BORDER-TOP: green solid 1pt;width:500px" 
+ROWS=8></TEXTAREA>
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+注:<font color=blue>PASV数据传输端口是指PASV模式下本地允许开放的数据端口.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+如果想设置端口范围为7000至7100之间则设为7000-7100.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+如果设置为0-8000,则表明可以分配8000之前的任何端口.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+如果设置为8000-0,则报名可分配大于=8000的任何端口.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+如果不设置则随机分配任何可利用的端口,等价于0-0.
+</font>
+<br>
+</td></tr>
+
+<tr><td colspan=2><span id=lblHelp></span></td></tr>
+
+</table>
+</BODY>
+</HTML>

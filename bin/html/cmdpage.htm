@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<SCRIPT LANGUAGE=javascript src="common.js"></SCRIPT>
+<SCRIPT LANGUAGE=javascript>
+
+function processRequest() 
+{
+	if (xmlHttp.readyState == 4) {
+		if (xmlHttp.status == 200){
+			document.all("txtOutput").value=document.all("txtOutput").value+xmlHttp.responseText;
+			
+            	} //else alert("请求的页面有异常,status="+xmlHttp.status);
+            	hidePopup();
+        }
+}
+
+function window_onload()
+{
+	if(!oPopup) createpopup();   	
+	if(!xmlHttp) createXMLHttpRequest();
+	document.all("cmdInput").focus();
+}
+function keypress(txtElement)
+{
+	var scmd=document.all("cmdInput").value;
+	if(window.event.keyCode==13 && scmd!="")
+	{
+		window.event.keyCode=0;
+		showPopup(250, 200, 150, 20);
+		xmlHttp.open("GET", "/cmdpage", true);
+		xmlHttp.onreadystatechange = processRequest;
+		xmlHttp.send("cmd="+scmd);	
+	}
+}
+function clsOutput()
+{
+	document.all("txtOutput").value="";
+}
+
+</SCRIPT>
+</HEAD>
+<body onload="window_onload();" >
+<br>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 align="center">
+<tr bgcolor="#e5e5e5" height=25px >
+<td width="80px">
+&nbsp;<B>输入命令:<B>
+</td>
+<td width=520px>
+<input id=cmdInput type="text" style="width:450px" onkeypress="javascript:keypress(this);">
+&nbsp;
+<input id=btnInput type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ title="清空命令响应输出内容" 
+ onmouseover='javascript:this.className="btnUP";' value="清 空" onclick="javascript:clsOutput();">
+</td><tr>
+
+<tr>
+<td colspan=2>
+<TEXTAREA id=txtOutput class="txtInput_b" ROWS=30 style="width:600px;" READONLY></TEXTAREA>
+</td></tr>
+
+</table>
+</BODY>
+</HTML>

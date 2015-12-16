@@ -1,0 +1,122 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<SCRIPT LANGUAGE=javascript src="common.js"></SCRIPT>
+<SCRIPT LANGUAGE=javascript src="proxyaccount.js"></SCRIPT>
+</HEAD>
+<body onload="window_onload()" >
+&nbsp;&nbsp;
+<A href="proxysets.htm">Proxy 状态</A>
+&nbsp;&nbsp;
+<A href="proxyaccount.htm">Proxy 帐号</A> 
+&nbsp;&nbsp;
+<A href="proxyini.htm">导入/导出</A>
+<br>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 align="center">
+<tr bgcolor="#e5e5e5" height=25px>
+<td width="500px">
+&nbsp;<B>代理帐号列表:<B>
+<select id=selAccount style="width:200px" onchange="javascript:user_change(this);">
+<option value="">选择帐号进行修改/删除</option>
+</select>
+<span id=lblHelp></span>
+</td>
+<td width=100px>
+&nbsp;
+</td><tr>
+
+<tr><td colspan=2><hr></td></tr>
+
+<tr bgcolor="#e5e5e5" height=25px>
+<td>
+&nbsp;<B>帐号信息:<B>
+</td>
+<td>
+<input id=btnSave type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="新增/修改" onclick="javascript:user_save();">
+<input id=btnDele type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";'  
+ onmouseover='javascript:this.className="btnUP";' value="删 除" onclick="javascript:user_dele();">
+</td><tr>
+
+<tr>
+<td colspan=2>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+帐 号 名:<input id=lblUser type=text class="txtInput_b"> &nbsp;&nbsp;&nbsp;&nbsp;(帐号不区分大小写)
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+帐号密码:<input id=lblPswd type=text class="txtInput_b"> &nbsp;&nbsp;&nbsp;&nbsp;(如果不设置密码则表示无需密码)
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+帐号描述:<input id=lblDesc type=text class="txtInput_b" style="width:400px"> 
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+有效期限:<input id=lblExpired type=text class="txtInput_b" READONLY>(yyyy-mm-dd)
+<input type=checkbox value=1 id=chkExpired checked onclick="javascript:clkExpired(this);">永不过期
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+登陆限制:<input id=lblMaxSignin type=text class="txtInput_b" value="0"> &nbsp;&nbsp;&nbsp;&nbsp;(最大并发连接数限制,0不限)
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+带宽限制:<input id=lblMaxRatio type=text class="txtInput_b" value="0">KB/s (最大带宽限制,0则不限制)
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type=checkbox value=1 id=chkForbid >禁用此帐号
+<br>
+</td></tr>
+
+<tr bgcolor="#e5e5e5" height=25px>
+<td>
+&nbsp;<B>访问目的:<B>
+</td>
+<td>&nbsp;
+</td><tr>
+
+<tr>
+<td colspan=2>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+访问许可:
+<input type=radio value=1 name=chkDstAccess id=chkDstAccess1 checked>允许访问
+<input type=radio value=0 name=chkDstAccess id=chkDstAccess0 >禁止访问
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+IP/Host:<input id=lblDstAddr type=text class="txtInput_b" style="width:400px"> 
+<br>
+</td></tr>
+
+<tr bgcolor="#e5e5e5" height=25px>
+<td>
+&nbsp;<B>访问者:<B>
+</td>
+<td>&nbsp;
+</td><tr>
+
+<tr>
+<td colspan=2>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+访问许可:
+<input type=radio value=1 name=chkIPAccess id=chkIPAccess1 checked>允许访问
+<input type=radio value=0 name=chkIPAccess id=chkIPAccess0 >禁止访问
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+IP/Host:<input id=lblIPAddr type=text class="txtInput_b" style="width:400px"> 
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+注:IP/Host域可输入多个IP地址或域名,各项之间以逗号分割.IP地址支持*通配符号,域名不支持通配符.
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+例如: www.163.com,192.168.0.12,192.169.1.*,192.166.*.5
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+如果想限制特定的端口，可在IP地址或域名后加上端口信息，中间以':'分割<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+例如: www.163.com,192.169.1.*:21,192.166.*.5,*.*.*.*:7779
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+*仅用来匹配IP地址4段号码中的一个段.下列写法不支持192.168.1.1*
+<br>
+</td></tr>
+
+</table>
+</BODY>
+</HTML>

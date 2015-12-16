@@ -1,0 +1,56 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: msnlib - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ibmsz\LOCALS~1\Temp\RSPC9E.tmp" with contents
+[
+/nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_MBCS" /D "_LIB" /FR"Release/" /Fp"Release/msnlib.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"E:\yyc\net4cpp2.1\Libs\msnlib\msnc0.cpp"
+"E:\yyc\net4cpp2.1\Libs\msnlib\msnc1.cpp"
+"E:\yyc\net4cpp2.1\Libs\msnlib\msnlib.cpp"
+"E:\yyc\net4cpp2.1\Libs\msnlib\msnproxy.cpp"
+"E:\yyc\net4cpp2.1\Libs\msnlib\msnthread.cpp"
+"E:\yyc\net4cpp2.1\Libs\msnlib\msnutils.cpp"
+"E:\yyc\net4cpp2.1\Libs\msnlib\NS_parsecmd.cpp"
+"E:\yyc\net4cpp2.1\Libs\msnlib\NS_sendcmd.cpp"
+"E:\yyc\net4cpp2.1\Libs\msnlib\SS_parsecmd.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ibmsz\LOCALS~1\Temp\RSPC9E.tmp" 
+Creating temporary file "C:\DOCUME~1\ibmsz\LOCALS~1\Temp\RSPC9F.tmp" with contents
+[
+/nologo /out:"..\bin\msnlib11.lib" 
+.\Release\msnc0.obj
+.\Release\msnc1.obj
+.\Release\msnlib.obj
+.\Release\msnproxy.obj
+.\Release\msnthread.obj
+.\Release\msnutils.obj
+.\Release\NS_parsecmd.obj
+.\Release\NS_sendcmd.obj
+.\Release\SS_parsecmd.obj
+]
+Creating command line "link.exe -lib @C:\DOCUME~1\ibmsz\LOCALS~1\Temp\RSPC9F.tmp"
+<h3>Output Window</h3>
+Compiling...
+msnc0.cpp
+msnc1.cpp
+msnlib.cpp
+msnproxy.cpp
+msnthread.cpp
+msnutils.cpp
+NS_parsecmd.cpp
+NS_sendcmd.cpp
+SS_parsecmd.cpp
+Creating library...
+
+
+
+<h3>Results</h3>
+msnlib11.lib - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

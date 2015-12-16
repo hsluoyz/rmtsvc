@@ -1,0 +1,24 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<SCRIPT LANGUAGE=javascript src="common.js"></SCRIPT>
+<SCRIPT LANGUAGE=javascript src="viewScreen.js"></SCRIPT>
+</HEAD>
+<body onload="window_onload()" style="overflow:hidden;">
+<table WIDTH=100%  height=100% BORDER=1 CELLSPACING=0 CELLPADDING=0>
+
+<tr><td valign=top>
+<div id=divScreen style="height:100%;width:100%;overflow:auto;">
+   <img name=screenimage id=screenimage title="屏幕查看" onload='javascript:Imgloaded();'>
+</div>
+
+</table>
+</BODY>
+</HTML>
+<SCRIPT LANGUAGE="javascript">
+document.oncontextmenu = new Function("return false;");
+document.screenimage.onmousemove=msmove_IE;
+document.screenimage.onmouseup=msup;
+</SCRIPT>
+

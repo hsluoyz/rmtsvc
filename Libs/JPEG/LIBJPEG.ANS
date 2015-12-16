@@ -1,0 +1,12 @@
+winjpeg.lib & 
++jcapi.obj +jcparam.obj +jdatadst.obj +jcmaster.obj & 
++jcmarker.obj +jcmainct.obj +jcprepct.obj & 
++jccoefct.obj +jccolor.obj +jcsample.obj +jchuff.obj & 
++jcdctmgr.obj +jfdctfst.obj +jfdctflt.obj & 
++jfdctint.obj +jdapi.obj +jdatasrc.obj +jdmaster.obj & 
++jdmarker.obj +jdmainct.obj +jdcoefct.obj & 
++jdpostct.obj +jddctmgr.obj +jidctfst.obj & 
++jidctflt.obj +jidctint.obj +jidctred.obj +jdhuff.obj & 
++jdsample.obj +jdcolor.obj +jquant1.obj +jquant2.obj & 
++jdmerge.obj +jcomapi.obj +jutils.obj +jerror.obj & 
++jmemmgr.obj +jmemdos.obj +jmemdosa.obj 

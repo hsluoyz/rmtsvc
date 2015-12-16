@@ -1,0 +1,127 @@
+rmtsvc2.5.x build101105 使用说明 (本版本不再支持MSN远控)
+程序介绍：
+	1、远程主机监控/监视 
+	2、远程文件/服务/注册表/进程/telnet管理 
+	3、功能强大的FTP服务 
+	4、功能强大的代理服务，支持二级代理，支持HTTPS/SOCKS4/SOCKS5 
+	4、完善的vIDC管理配置，支持本地端口映射，远程端口映射，内网代理，代理服务等等 
+	5、SSL VPN功能，为你的内网应用服务提供安全访问保护 
+	6、支持UPnP，直接在支持UPnP的网关或路由上进行端口映射(new 20070806新增)
+
+【程序运行】:
+	rmtsvc是一个控制台应用程序，它可以作为系统服务运行。支持的命令行参数如下:
+-i [DisplayName] [ServiceDesc] --- 安装服务
+	例如: rmtsvc.exe -i
+	      rmtsvc.exe -i test 测试服务
+-u ---卸载服务
+	例如: rmtsvc.exe -u
+-s --- 启动服务
+	例如: rmtsvc.exe -s
+-e --- 停止服务
+	例如: rmtsvc.exe -e
+-d --- Debug方式运行,-d0 ~ -d4指定不同的debug调试信息级别，关闭控制台窗口将结束程序运行
+	例如: rmtsvc.exe -d4
+-f filename 指定本程序的配置文件名,如果不指定则默认参数配置文件名为和程序同名但扩展名为ini的文件
+	例如: rmtsvc.exe -d4 -f aa.ini
+-c saveasfile --- 将当前ini配置参数写入exe文件本身并另存为指定的文件
+-C saveasfile --- 将当前ini配置参数写入exe文件本身并另存为指定的文件,用此参数另存的EXE运行时将不支持ini配置文件
+	注意 -c/-C 参数必须和-d参数一起用	
+	例如: rmtsvc.exe -d4 -c rmtsvc1.exe 
+	      rmtsvc.exe -d4 -c rmtsvc1.exe -f aaa.ini
+	      rmtsvc.exe -d4 -C rmtsvc2.exe 
+
+
+【关于配置文件】:
+rmtsvc支持ini配置文件，用户可以以-f参数指定配置文件名称，如果不指定程序默认读取和程序同名但扩展名为ini的参数配置文件.
+比如程序名为rmtsvc.exe,则默认读取的配置文件为rmtsvc.ini。
+程序读取配置信息的顺序为先读取exe自身保存的的配置命令，然后读取ini配置文件，最后读取命令行的特殊命令参数
+对于用-C参数另存生成的exe文件，程序将不在读取ini配置文件，即使运行时指定了ini配置文件。
+ini配置文件由程序支持的一系列配置命令组成，每行为一个配置命令。
+如果行开头为!,说明此行为注释，不作解释。关于支持的配置命令见下面的说明。
+
+【ini配置命令】：
+注意：下面的命令解释中 <>代表用户输入内容，[]代表此项可输可不输 |代表可输入其中一项
+	下面的配置命令中如果某个=号右边的值中包含空格，则需要用"号将值括起来，例如: sets log="c:\program files\aaa.log"
+
+设置本服务的信息
+命令格式: 
+	sets [spyself=FALSE] [stop_pswd=<停止服务的密码>] [log=<日志输出文件>] [opentype=APPEND] [loglevel=DEBUG|INFO|WARN|ERROR]
+spyself=FALSE      : 关闭异常退出监视。如果不设置默认打开异常退出监视,如果程序异常退出或被非法杀掉自动重起
+stop_pswd=<停止服务的密码> : 设置停止服务的密码，如果设置了密码则不输入密码将无法停止服务。
+		如果设置了密码用户只能在命令行下通过-e <密码> 命令停止服务，而无法通过SCM服务控制台或net stop命令停止服务。
+		假如程序名为xx.exe,设置了停止密码为123，则要停止此服务需在命令行下输入xx.exe -e 123	
+log=<日志输出文件> : 设置程序是否输出日志文件，如果不指定则不输出否则输出指定的日志文件
+opentype=APPEND    : 设置程序启动时是否为追加写日志文件还是覆盖写,如果不设置此项则为覆盖写
+loglevel=DEBUG|INFO|WARN|ERROR : 设置日志输出的级别，默认为INFO级别
+faceless=TRUE : 如果以非服务方式启动且运行时没指定-d参数则以无窗口的形式运行本程序
+	例如双击直接运行本程序时，如果设置了此项则以无窗口的形式运行，即使关闭控制台窗口程序也不会结束
+	否则以带窗口的形式运行按Ctrl+c或者关闭窗口则程序将结束
+install=TRUE : 如果设置了此项则运行后自动安装为服务 	
+范例: sets stop_pswd=1234
+ 
+设置web服务的相关信息
+命令格式: 
+	webs [port=<web服务端口>] [bindip=<本服务绑定的本机IP>] [ssl_enabled=true] [ssl_verify=true]
+port=<服务端口>    : 设置服务端口，如果不设置则默认为7778.设置为0则不启动web服务 <0则随即分配端口
+bindip=<本服务绑定的本机IP> : 设置本服务绑定的本机IP，如果不设置则默认绑定本机所有IP
+ssl_enabled=true: 指示本服务是为SSL加密服务，如果不配置则为普通服务
+ssl_verify=true：只有指定ssl_enabled=true本参数才有效，只是此SSL服务需要验证客户端证书，默认不需要
+poweroff=ANYONE: 是否无需权限可直接远程关机或重启，默认必须登陆rmtsvc管理界面可操作。命令格式：
+                 <HOST>/command?cmd=[ShDw|ReSt|Lock|LgOf]
+		ShDw: 关机 ReSt：重启 Lock：锁定 LgOf：注销
+范例: webs port=7779 
+
+设置web服务的ip过滤规则或针对某个帐号的IP过滤规则
+命令格式:
+	webiprules [access=0|1] ipaddr="<IP>,<IP>,..."
+access=0|1     : 对符合下列IP条件的是拒绝还是放行
+范例: webiprules access=0 ipaddr="192.168.0.*,192.168.1.10"
+
+设置访问者帐号权限信息
+命令格式：
+	user account=<帐号> [pswd=<帐号密码>] access=<帐号的访问权限>
+account=<访问帐号> : 必须项. 要添加的rmtsvc访问者帐号。
+pswd=<帐号密码>    : 必须项. 指定帐号的密码
+access=<帐号的访问权限>
+	如果不设置则默认具有ACCESS_NONE访问权限。设置格式和含义如下
+		ACCESS_ALL=ACCESS_SCREEN_ALL|ACCESS_FILE_ALL|ACCESS_REGIST_ALL|ACCESS_SERVICE_ALL|ACCESS_TELNET_ALL|ACCESS_FTP_ADMIN|ACCESS_VIDC_ADMIN
+		ACCESS_SCREEN_ALL: 远程屏幕完全控制权限
+		ACCESS_SCREEN_VIEW: 远程查看屏幕权限
+		ACCESS_FILE_ALL  : 远程文件管理操作，可读写删除等
+		ACCESS_FILE_VIEW : 远程文件管理紧紧允许读，下载
+		ACCESS_REGIST_ALL: 远程注册表管理可读写添加删除等
+		ACCESS_REGIST_VIEW:紧紧可查看注册表信息
+		ACCESS_SERVICE_ALL:远程服务管理，可完全操作
+		ACCESS_SERVICE_VIEW:远程服务权利仅仅可查看
+		ACCESS_TELNET_ALL:  远程telnet管理
+		ACCESS_FTP_ADMIN : 远程FTP服务配置管理
+		ACCESS_VIDC_ADMIN : 远程vIDC管理配置
+!可配置多个帐号，每个帐号一行
+
+范例: user account=aa pswd=bb access=ACCESS_ALL
+
+rmtsvc.ini文件范例
+sets
+webs port=7779
+user account=aa pswd=1234 access=ACCESS_ALL
+
+
+//===========ini配置文件 扩展命令========================================
+kill - 杀死指定的进程
+   用法: kill <进程名或PID>,<进程名或PID>,<进程名或PID>...
+   例如kill 345,aaa.exe
+
+exec - 启动指定的进程
+   用法: exec [-hide] [-shell] [-check <programname>] [-user <[Domain\]account:password>] [-wait <dwMilliseconds>] <full path program>
+   -hide  - 是否后台运行指定的程序
+   -check <programname> - 执行指定的程序前是否先检测<programname>是否已经运行，，<programname>不区分大小写.
+			如果已运行则不执行指定的程序
+   -shell - 以shellExecute方式打开指定的文件，不支持-user选项
+   -user <[Domain\]account:password> - 以指定得帐号启动指定的程序，仅仅在本程序以服务方式运行时有效。
+			Domain域可以不指定，如果不指定则默认为本地帐号
+   -wait <dwMilliseconds> - 成功启动进程后是否等待进程结束==0，不等待,<0等待进程结束,>0 等待指定得毫秒
+   <full path program>  - 指定要执行的程序和程序运行参数
+
+
+  
+  

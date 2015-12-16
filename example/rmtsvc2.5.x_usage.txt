@@ -1,0 +1,307 @@
+rmtsvc2.5.x 使用说明
+程序介绍：
+	1、远程主机监控/监视 
+	2、远程文件/服务/注册表/进程/telnet管理 
+	3、功能强大的FTP服务 
+	4、功能强大的代理服务，支持二级代理，支持HTTPS/SOCKS4/SOCKS5 
+	4、完善的vIDC管理配置，支持本地端口映射，远程端口映射，内网代理，代理服务等等 
+	5、SSL VPN功能，为你的内网应用服务提供安全访问保护 
+	6、msnbot功能，可通过MSN进行上述功能的操作管理 
+	7、支持UPnP，直接在支持UPnP的网关或路由上进行端口映射(new 20070806新增)
+	
+【程序运行】:
+	rmtsvc是一个控制台应用程序，它可以作为系统服务运行。支持的命令行参数如下:
+-i [DisplayName] [ServiceDesc] --- 安装服务
+	例如: rmtsvc.exe -i
+	      rmtsvc.exe -i test 测试服务
+-u ---卸载服务
+	例如: rmtsvc.exe -u
+-s --- 启动服务
+	例如: rmtsvc.exe -s
+-e --- 停止服务
+	例如: rmtsvc.exe -e
+-d --- Debug方式运行,-d0 ~ -d4指定不同的debug调试信息级别，关闭控制台窗口将结束程序运行
+	例如: rmtsvc.exe -d4
+-f filename 指定本程序的配置文件名,如果不指定则默认参数配置文件名为和程序同名但扩展名为ini的文件
+	例如: rmtsvc.exe -d4 -f aa.ini
+-c saveasfile --- 将当前ini配置参数写入exe文件本身并另存为指定的文件
+-C saveasfile --- 将当前ini配置参数写入exe文件本身并另存为指定的文件,用此参数另存的EXE运行时将不支持ini配置文件
+	注意 -c/-C 参数必须和-d参数一起用	
+	例如: rmtsvc.exe -d4 -c rmtsvc1.exe 
+	      rmtsvc.exe -d4 -c rmtsvc1.exe -f aaa.ini
+	      rmtsvc.exe -d4 -C rmtsvc2.exe 
+
+
+【关于配置文件】:
+rmtsvc支持ini配置文件，用户可以以-f参数指定配置文件名称，如果不指定程序默认读取和程序同名但扩展名为ini的参数配置文件.
+比如程序名为rmtsvc.exe,则默认读取的配置文件为rmtsvc.ini。
+程序读取配置信息的顺序为先读取exe自身保存的的配置命令，然后读取ini配置文件，最后读取命令行的特殊命令参数
+对于用-C参数另存生成的exe文件，程序将不在读取ini配置文件，即使运行时指定了ini配置文件。
+ini配置文件由程序支持的一系列配置命令组成，每行为一个配置命令。
+如果行开头为!,说明此行为注释，不作解释。关于支持的配置命令见下面的说明。
+
+【ini配置命令】：
+注意：下面的命令解释中 <>代表用户输入内容，[]代表此项可输可不输 |代表可输入其中一项
+	下面的配置命令中如果某个=号右边的值中包含空格，则需要用"号将值括起来，例如: sets log="c:\program files\aaa.log"
+
+设置本服务的信息
+命令格式: 
+	sets [spyself=FALSE] [stop_pswd=<停止服务的密码>] [log=<日志输出文件>] [opentype=APPEND] [loglevel=DEBUG|INFO|WARN|ERROR]
+spyself=FALSE      : 关闭异常退出监视。如果不设置默认打开异常退出监视,如果程序异常退出或被非法杀掉自动重起
+stop_pswd=<停止服务的密码> : 设置停止服务的密码，如果设置了密码则不输入密码将无法停止服务。
+		如果设置了密码用户只能在命令行下通过-e <密码> 命令停止服务，而无法通过SCM服务控制台或net stop命令停止服务。
+		假如程序名为xx.exe,设置了停止密码为123，则要停止此服务需在命令行下输入xx.exe -e 123	
+log=<日志输出文件> : 设置程序是否输出日志文件，如果不指定则不输出否则输出指定的日志文件
+opentype=APPEND    : 设置程序启动时是否为追加写日志文件还是覆盖写,如果不设置此项则为覆盖写
+loglevel=DEBUG|INFO|WARN|ERROR : 设置日志输出的级别，默认为INFO级别
+faceless=TRUE : 如果以非服务方式启动且运行时没指定-d参数则以无窗口的形式运行本程序
+	例如双击直接运行本程序时，如果设置了此项则以无窗口的形式运行，即使关闭控制台窗口程序也不会结束
+	否则以带窗口的形式运行按Ctrl+c或者关闭窗口则程序将结束
+install=TRUE : 如果设置了此项则运行后自动安装为服务 	
+范例: sets stop_pswd=1234
+ 
+设置web服务的相关信息
+命令格式: 
+	webs [port=<web服务端口>] [bindip=<本服务绑定的本机IP>] [ssl_enabled=true] [ssl_verify=true]
+port=<服务端口>    : 设置服务端口，如果不设置则默认为7778.设置为0则不启动web服务 <0则随即分配端口
+bindip=<本服务绑定的本机IP> : 设置本服务绑定的本机IP，如果不设置则默认绑定本机所有IP
+ssl_enabled=true: 指示本服务是为SSL加密服务，如果不配置则为普通服务
+ssl_verify=true：只有指定ssl_enabled=true本参数才有效，只是此SSL服务需要验证客户端证书，默认不需要
+
+范例: webs port=7779 
+
+
+设置访问者帐号权限信息
+命令格式：
+	user account=<帐号> [pswd=<帐号密码>] access=<帐号的访问权限>
+account=<访问帐号> : 必须项. 要添加的rmtsvc访问者帐号。
+pswd=<帐号密码>    : 必须项. 指定帐号的密码
+access=<帐号的访问权限>
+	如果不设置则默认具有ACCESS_NONE访问权限。设置格式和含义如下
+		ACCESS_ALL=ACCESS_SCREEN_ALL|ACCESS_FILE_ALL|ACCESS_REGIST_ALL|ACCESS_SERVICE_ALL|ACCESS_TELNET_ALL|ACCESS_FTP_ADMIN|ACCESS_VIDC_ADMIN
+		ACCESS_SCREEN_ALL: 远程屏幕完全控制权限
+		ACCESS_SCREEN_VIEW: 远程查看屏幕权限
+		ACCESS_FILE_ALL  : 远程文件管理操作，可读写删除等
+		ACCESS_FILE_VIEW : 远程文件管理紧紧允许读，下载
+		ACCESS_REGIST_ALL: 远程注册表管理可读写添加删除等
+		ACCESS_REGIST_VIEW:紧紧可查看注册表信息
+		ACCESS_SERVICE_ALL:远程服务管理，可完全操作
+		ACCESS_SERVICE_VIEW:远程服务权利仅仅可查看
+		ACCESS_TELNET_ALL:  远程telnet管理
+		ACCESS_FTP_ADMIN : 远程FTP服务配置管理
+		ACCESS_VIDC_ADMIN : 远程vIDC管理配置
+!可配置多个帐号，每个帐号一行
+
+范例: user account=aa pswd=bb access=ACCESS_ALL
+
+设置msn机器人相关信息
+命令格式:
+	msnbot account=<msn帐号>:<密码> [trusted=<受信任的msn帐号>] [prefix="<移动MSN返回消息前缀>"]
+account=<msn帐号>:<密码> : 指定msn机器人的登录帐号和密码.
+trusted=<受信任的msn帐号>: 指定msn机器人信任的msn帐号，
+			  此帐号和msn机器人聊天控制无需输入控制访问密码
+			  可输入多个帐号，用','分割
+prefix="<移动MSN返回消息前缀>" : 指定消息返回的前缀，msnbot在解析MSN消息时会截掉指定的前缀然后再进行解释
+			例如我们在手机上用移动MSN和msnbot会话时，移动MSN会在你发送的每句话前面加上"对方正在使用手机MSN,详见http://mobile.msn.com.cn。"
+			导致msnbot解析命令出错。如下配置，则msnbot会先去掉指定的前缀再解析
+			msnbot account=xxx@hotmail.com:aaa prefix="对方正在使用手机MSN,详见http://mobile.msn.com.cn。"
+			
+注: 如果没有配置prefix，程序内部默认前缀为"对方正在使用手机MSN,详见http://mobile.msn.com.cn。"
+    即默认支持移动MSN，当移动MSN的前缀变了后可通过配置prefix更改前缀
+注：如果配置了msn机器人帐号，则msn机器人的帐号密码默认也是rmtsvc的访问帐号密码，权限是ACCESS_ALL	
+
+范例: msnbot account=XXX@163.com:111 trusted=aaa@hotmail.com
+
+配置msn机器人通过代理服务器连接MSN服务
+命令格式: 
+	proxy type=HTTPS|SOCKS4|SOCKS5 host=<代理服务地址> port=<代理服务端口> [user=<访问代理服务帐号>] [pswd=<访问代理服务密码>]
+如果设置了则通过指定的代理服务器发送邮件，否则不通过代理服务器
+type=HTTPS|SOCKS4|SOCKS5 : 指明代理协议类型，例如:type=SOCKS5
+host=<代理服务地址>      : 指明代理服务器主机地址
+port=<代理服务端口>      : 指明代理服务端口
+
+
+rmtsvc.ini文件范例
+sets
+msnbot account=XXX@163.com:111 trusted=aaa@hotmail.com
+webs port=7779
+user account=aa pswd=1234 access=ACCESS_ALL
+
+
+//------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------msn机器人支持的命令格式说明------------------------------------
+//===========下列所有命令都可在和msn机器人聊天控制窗口中输入========================================
+//===========输入命令时要在命令前面加#号===================================
+//===========例如杀掉进程aa.exe ,要如下输入 #kill aa.exe =================================
+kill - 杀死指定的进程
+   用法: kill <进程名>,<进程名>,<进程名>...
+
+exec - 启动指定的进程
+   用法: exec [-hide] [-check <programname>] [-user <[Domain\]account:password>] [-wait <dwMilliseconds>] <full path program>
+   -hide  - 是否后台运行指定的程序
+   -check <programname> - 执行指定的程序前是否先检测<programname>是否已经运行，，<programname>不区分大小写.
+			如果已运行则不执行指定的程序
+   -user <[Domain\]account:password> - 以指定得帐号启动指定的程序，仅仅在本程序以服务方式运行时有效。
+			Domain域可以不指定，如果不指定则默认为本地帐号
+   -wait <dwMilliseconds> - 成功启动进程后是否等待进程结束==0，不等待,<0等待进程结束,>0 等待指定得毫秒
+   <full path program>  - 指定要执行的程序和程序运行参数
+
+plst - 列出本机当前进程
+   用法: plst [<过滤条件>,<过滤条件>,<过滤条件>...]
+       <过滤条件> - 指定仅仅列出那些进程，支持*?通配符。*匹配多个字符，?匹配一个字符。
+                  如果不输入过滤条件则列出所有的进程
+
+path - 设置上载文件的默认的存储路径。
+   用法: path [<默认存储路径>]
+	<默认存储路径> - 如果不设置此项，则返回当前设置的存储路径。如果设置为.则存储路径为当前msnbot程序的路径，否则为用户设置路径
+			程序启动后默认的存储路径为msnbot程序所在目录
+
+down - 从指定的url下载文件到msnbot运行的机器或从msnbot所在机器下载文件到本机
+   用法: down <http://url>|<ftp://url>|<msnbot本地文件>
+	 <http://url>- 从指定的web服务器下载文件到msnbot所在机器，默认存储路径为path指定的路径
+	 <ftp://url> - 从指定的ftp服务器下载文件到msnbot所在机器，默认存储路径为path指定的路径
+         <msnbot本地文件>  - 下载指定的msnbot本地文件到本机，即控制端。
+
+head - 指定msnbot机器人的头像
+   用法: head [<msnbot本地图像文件>]
+         <msnbot本地图像文件> - msnbot机器本地的png/jpg图像文件，如果不输入则取消机器人头像。
+
+nick - 指定msnbot机器人的昵称
+   用法: nick <用户输入昵称>
+
+snap - 捕获当前屏幕
+   用法: snap [<jpeg图片质量>]
+         <jpeg图片质量> - 指定捕获的jpeg图片的质量1~100,如果不输默认是60
+                          指定的值越大图片质量越高，但图片文件大小越大
+stat - 显示系统信息
+          显示机器名，操作系统信息，cpu信息以及当前工作站的状态
+
+keys - 模拟发送指定的按键/字符串
+    用法: keys <要发送的字符串>
+
+fpas - 查找登录帐号密码
+    用法: fpas [<Domain>\<要查找的帐号>]
+          <Domain>        - 指定要查找帐号的域，如果不输入则为本机当前域
+          <要查找的帐号>  - 指定要查找帐号的密码，如果不输入则为当前登录帐号
+          示例 #fpas
+               #fpas find_account
+               #fpas mydomain\find_account
+
+shutdown - 关机
+restart  - 重起机器
+logoff   - 注销当前用户
+lock     - 锁定当前机器(only for NT/2K/xp)
+3key     - 模拟发送Ctrl+Alt+del按键
+  
+
+
+vcap - 摄像头命令
+   vcap status - 查看控制机摄像头信息
+	用法: vcap status
+	
+   vcap snap - 打开并捕获摄像头图像
+	用法: vcap snap [<jpeg图片质量>]
+	<jpeg图片质量> - 指定捕获的jpeg图片的质量1~100,如果不输默认是60
+                          指定的值越大图片质量越高，但图片文件大小越大
+
+   vcap sets - 选择摄像头或设置摄像头的图像大小
+	用法: vcap sets [size=<width:height>] [device=<设备序号>]
+     	size=<width:height> : 设置摄像头的图像大小。如果你不清楚此摄像头支持哪些图像尺寸最好不要改
+	device=<设备序号> : 选择其他的摄像设备。设备序号可通过vcap status命令查看
+	
+www - 启动或停止rmtsvc的web远程控制服务
+   www stop  -  停止rmtsvc的web远程控制服务
+   www start [<端口>] - 启动rmtsvc的web远程控制服务
+   		如果指定了端口，则以指定的端口启动服务,如果指定端口为0则随机启动服务端口
+   		如果没有指定端口则以配置的端口启动rmtsvc的web远程控制服务
+   www       - 返回rmtsvc的web远程控制服务的状态
+  
+ftp - 启动或停止FTP服务
+   ftp stop - 停止FTP服务
+   ftp start [<端口>] - 启动FTP服务
+   	      如果指定了端口，则以指定的端口启动服务,如果指定端口为0则随机启动服务端口
+   	      如果没有指定端口则以配置的端口启动FTP服务
+   ftp      -  返回FTP服务的状态
+
+proxy - 启动或停止代理服务
+   proxy stop - 停止代理服务
+   proxy start [<端口>] - 启动代理服务
+   	      如果指定了端口，则以指定的端口启动服务,如果指定端口为0则随机启动服务端口
+   	      如果没有指定端口则以配置的端口启动代理服务
+   proxy      -  返回代理服务的状态
+   
+vidcs - 启动或停止vidc服务
+   vidcs stop - 停止vidc服务
+   vidcs start [<端口>] - 启动vidc服务
+   	      如果指定了端口，则以指定的端口启动服务,如果指定端口为0则随机启动服务端口
+   	      如果没有指定端口则以配置的端口启动vidc服务
+   vidcs      -  返回vidc服务的状态
+
+   
+mtcpr - 进行远程端口映射
+   格式: mtcpr vidcs=<host:port@pswd> appsvr=<host:port> mport=<映射端口>[+-ssl]
+   vidcs: 指定远程vidcs的IP/域名服务端口号和访问密码
+   appsvr: 指定要映射的应用服务
+   例如： mtcpr vidcs=222.33.11.xx:8088@aa appsvr=192.168.1.11:21 mport=222
+   
+export - 导出所有exe/ftp/proxy/vidc的配置参数
+fport - 进程端口关联列表
+help  - 列出所有支持的命令
+
+import - 导入FTP/Proxy/vidc配置参数
+格式: #import [ftp|proxy|vidc]<[配置参数文件路径]
+例如: 从c:\1.txt导入ftp的配置
+      #import ftp<c:\1.txt
+      从c:\2.ini导入proxy配置
+      #import proxy<c:\2.ini
+注意: 为了避免手写配置参数出错，配置参数文件最好由一个从某个rmtsvc配置好了后由导出功能导出
+	然后copy到一个文件中，最后上传到msnbot所在机器再执行import命令
+	
+upnp - UPnP设备查找以及UPnP映射
+    格式: upnp [status|add|delete|find|stop]
+    upnp find  - 查找UPnP设备
+    upnp stop  - 停止查找
+    upnp add type=[TCP|UDP] appsvr=<应用服务> mport=<外网端口> appdesc=<描述>
+               - UPnP端口映射。映射指定的内网应用服务到UPnP设备(NAT网关、路由)指定的端口上
+               例如: upnp add type=TCP appsvr=127.0.0.1:7777 mport=7778 appdesc="aa"
+    upnp delete <外网端口> <TCP|UDP>
+    	       - 从UPnP设备上删除某个端口映射。
+    	       例如删除上面映射的端口: upnp delete 7778 TCP
+    upnp status - 显示当前UPnP设备信息和映射端口信息
+
+update - 升级rmtsvc
+格式: #update <新版本exe文件路径或URL地址>   
+例如: #update c:\aa.exe
+  或者 #update http://host/aa.exe
+      将aa.exe覆盖更新当前的rmtsvc
+<新版本exe文件路径或URL地址> - 指rmtsvc运行机器上的新版本exe，或者指定url地址，可以是http或ftp地址
+      当然你也可以用#down命令从指定的网站或ftp服务下载新版本的exe到rmtsvc运行的机器上
+注意: 如果新版本的exe程序已经写入配置参数，则不会用当前运行版本exe中的写入参数覆盖新版本exe中的写入参数
+
+telnet - 启动停止telnet服务，反向telnet连接
+   telnet stop - 停止telnet服务
+   telnet start [<端口>] [account=<帐号:密码>]- 启动telnet服务
+   	      如果指定了端口，则以指定的端口启动服务,否则以配置配置的端口启动服务
+   	      如果指定了访问帐号密码且不为空则只能以指定的帐号访问，假如帐号密码为空则允许匿名访问
+   	      否则如果没有指定account则以ini配置的参数为准，例如:#telnet start 23 account=aa:bb
+   telnet -r <host>:<port>: 反向连接指定的主机和端口获得一个CMD Shell，例如：#telnet -r 192.168.1.2:1234
+   telnet      -  返回telnet服务的状态
+注意: telnet支持msnbot的扩展命令，用法如msnbot，除了head,nick,snap,vcap等MSN特殊支持的命令
+     ini配置参数新增支持telnet配置命令，格式：
+     telnet [port=<服务端口>] [bindip=<本服务绑定的本机IP>] [account=<帐号:密码>]
+     
+
+2007-03-12
+上述所有msnbot命令支持输出的重定向，用 > 将输出重定向指定的文件
+例如希望将#plst输出的进程信息输出到aa.txt,可输入如下命令:
+#plst > a.txt
+然后通过#down命令下载a.txt
+#down a.txt
+
+Q:为何我通过msnbot停止了某服务(例如ftp,www,proxy等)，再通过命令打开此服务，确总提示打开失败
+A:关闭和此msnbot的聊天会话窗口，然后重新打开，再输入启动服务命令即可
+  原因是此cmdshell继承了父进程的句柄，因此即使关闭了某socket服务，但由于此cmdshell进程继承了该句柄，因此
+  系统并不释放该句柄所占端口，只有此cmdshell结束才真正释放
+
+  
+  

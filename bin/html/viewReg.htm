@@ -1,0 +1,91 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<SCRIPT LANGUAGE=javascript src="common.js"></SCRIPT>
+<SCRIPT LANGUAGE=javascript src="viewReg.js"></SCRIPT>
+</HEAD>
+<body onload="window_onload()" style="overflow:hidden;">
+<table WIDTH=100%  height=100% BORDER=1 CELLSPACING=0 CELLPADDING=0>
+
+<tr height=25px>
+<td>
+&nbsp;
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="删 除" id=fDelkey onclick="delKey();" disabled >
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="增 加" id=fAddkey onclick="addKey();" disabled >
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="刷 新" onclick="refreshKey();">
+ &nbsp;共 <span id="lblKeyNum" name="lblKeyNum"></span>&nbsp;项子键
+</td>
+<td>
+&nbsp;
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="增 加" id=fAddItem onclick="addItem();" disabled >
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="删 除" id=fDelItem onclick="delItem();" disabled >
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="刷 新" onclick="refreshItem();">
+ &nbsp;子键:<span id="lblRegKey" name="lblRegKey"></span>
+ &nbsp; - 项目:<span id="lblRegItem" name="lblRegItem"></span>
+ &nbsp;<span id="lblHelp" name="lblHelp"></span>
+</td>
+</tr>
+
+<tr>
+<td valign=top width="30%">
+ <div style="height:100%;width:100%;overflow:auto;" >
+ <xml id="regkeyXML" ></xml>
+ <table id=tblRegkey name=tblRegkey datasrc="#regkeyXML" width=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+ <THEAD>
+ <tr height=18px bgColor="Silver">
+ <th width="20px"> &nbsp;<A href="javascript:goup();" style="cursor:hand;">UP</A> </th>
+ <th> 项名称 </th>
+ </tr><THEAD>
+ <TBODY>
+ <tr onmousemove="javascript:this.style.background='#e5e5e5';" onmouseout="javascript:this.style.background='#ffffff';"  height=18px>
+ <td onclick="javascript:regkeyDblClick(this.parentElement);">
+ &nbsp;<span datafld="subkeys" style="cursor:hand;" ></span>&nbsp;</td>
+ <td onclick="javascript:regkeyClick(this.parentElement);" nowrap>
+ <span datafld="regkey" style="cursor:hand;" ></span></td>
+ </tr>
+ <TBODY></table>
+ </div>
+</td>
+<td valign=top >
+ <div style="height:100%;width:100%;overflow:auto;" >
+ <xml id="regitemXML" ></xml>
+ <table id=tblRegitem name=tblRegitem datasrc="#regitemXML" width=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+ <THEAD>
+ <tr height=18px bgColor="Silver">
+ <th width=20px> &nbsp; </th>
+ <th width=100px> 类型 </th>
+ <th width=80px> 长度 </th>
+ <th width=220px> 名称 </th>
+ <th> 数据 </th>
+ </tr><THEAD>
+ <TBODY>
+ <tr onmousemove="javascript:this.style.background='#e5e5e5';" onmouseout="javascript:this.style.background='#ffffff';"  
+  id=fItems onclick="javascript:regItemClick(this);"  style="cursor:hand;" >
+ <td align=right ><span datafld="id" ></span></td>
+ <td align=center ><span datafld="rtype" ></span></td>
+ <td align=center ><span datafld="rdlen" ></span></td>
+ <td ><span datafld="rname" ></span></td>
+ <td><TEXTAREA class="txtInput_none" datafld="rdata" READONLY onclick="javascript:modifyItem(this);" 
+ onblur="javascript:cancelModifyItem(this);" onkeypress="javascript:keypress(this);"></TEXTAREA></td>
+ </tr>
+ <TBODY></table>
+ </div>
+</td>
+</tr>
+
+<tr><td colspan=2 bgcolor=Silver height=20px nowrap>
+&nbsp;
+<A href="javascript:goto();" style="cursor:hand;">跳转至</A>
+<A href="javascript:goup();" style="cursor:hand;">上一级</A>&nbsp;
+<span id="lblRegPath" name="lblRegPath"></span>
+</td></tr>
+</table>
+</BODY>
+</HTML>

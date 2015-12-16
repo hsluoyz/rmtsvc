@@ -1,0 +1,136 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<LINK REL="stylesheet" TYPE="text/css" HREF="style.css">
+<SCRIPT LANGUAGE=javascript src="common.js"></SCRIPT>
+<SCRIPT LANGUAGE=javascript src="viewFile.js"></SCRIPT>
+</HEAD>
+<body onload="window_onload()" style="overflow:hidden;">
+<table WIDTH=100%  height=100% BORDER=1 CELLSPACING=0 CELLPADDING=0>
+
+<tr height=25px>
+<td>
+&nbsp;
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="更 名" id=fRenFolder onclick="renFolder();" disabled >
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="删 除" id=fDelFolder onclick="delFolder();" disabled >
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="新 建" id=fNewFolder onclick="newFolder();" disabled >
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="属 性" id=fProFolder onclick="proFolder();">
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="刷 新" onclick="refreshFolder();">
+</td>
+<td>
+&nbsp;
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="运 行" id=fRunFile onclick="runFile();" disabled >
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="删 除" id=fDelFile onclick="delFile();" disabled >
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="上 传" id=fUpFile onclick="upFile();" disabled >
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="下 载" id=fDwFile onclick="dwFile();" >
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="属 性" id=fProFile onclick="proFile();" >
+ <input type="button" class="btnOff" onmouseout='javascript:this.className="btnOff";' 
+ onmouseover='javascript:this.className="btnUP";' value="刷 新" onclick="refreshFile();">
+ &nbsp;<span id="lblHelp" name="lblHelp"></span>
+</td>
+</tr>
+
+<tr>
+<td valign=top width="30%" >
+ <div style="height:100%;width:100%;overflow:auto;" >
+ <xml id="folderXML" ></xml>
+ <table id=tblFolder name=tblFolder datasrc="#folderXML" width=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+ <THEAD>
+ <tr height=18px bgColor="Silver">
+ <th width="20px">&nbsp;<A href="javascript:goup();" style="cursor:hand;">UP</A>  
+ </th>
+ <th> 文件夹 </th>
+ <th width="20px">&nbsp;<A href="javascript:document.getElementById('lblFolder').innerText='';refreshFile();" style="cursor:hand;">./</A>  
+ </th>
+ </tr>
+ <THEAD>
+ <TBODY>
+ <tr onmousemove="javascript:this.style.background='#e5e5e5';" onmouseout="javascript:this.style.background='#ffffff';"  height=18px>
+ <td onclick="javascript:folderDblClick(this.parentElement);">
+ &nbsp;<span datafld="hassub" style="cursor:hand;" ></span>&nbsp;</td>
+ <td onclick="javascript:folderClick(this.parentElement);" nowrap >
+ <span datafld="fname" style="cursor:hand;" ></span></td>
+ <td align=center> <span datafld="bhide"></span> </td>
+ </tr>
+ <TBODY>
+ </table>
+ </div>
+</td>
+<td valign=top >
+ <div style="height:100%;width:100%;overflow:auto;" >
+ <xml id="fileXML" ></xml>
+ <table id=tblFile name=tblFile datasrc="#fileXML" width=100% BORDER=0 CELLSPACING=0 CELLPADDING=0>
+ <THEAD>
+ <tr height=18px bgColor="Silver">
+ <th align=left style="cursor:hand" onclick="sort('fileXML','fileStyle','fname');">&nbsp;<u>文件名</u> </th>
+ <th width="20px"> &nbsp; </th>
+ <th width=80px align=right style="cursor:hand" onclick="sort('fileXML','fileStyle','lsize');"> <u>大小</u>&nbsp; </th>
+ <th width=150px align=left style="cursor:hand" onclick="sort('fileXML','fileStyle','ftype');">&nbsp;<u>类型</u> </th>
+ <th width=150px align=left style="cursor:hand" onclick="sort('fileXML','fileStyle','ftime');">&nbsp;<u>修改时间</u> </th>
+ </tr><THEAD>
+ <TBODY>
+ <tr onmousemove="javascript:this.style.background='#e5e5e5';" onmouseout="javascript:this.style.background='#ffffff';"  
+  id=fFiles onclick="javascript:fileClick(this);" style="cursor:hand;" >
+ <td><input type=text class="txtInput_none" datafld="fname" READONLY onclick="javascript:modifyItem(this);" 
+ onblur="javascript:cancelModifyItem(this);" onkeypress="javascript:keypress(this);"></td>
+ <td align=center> <span datafld="bhide"></span> </td>
+ <td align=right ><span datafld="fsize" >&nbsp;</span></td>
+ <td >&nbsp;<span datafld="ftype" ></span></td>
+ <td >&nbsp;<span datafld="ftime" ></span></td>
+ </tr>
+ <TBODY></table>
+ </div>
+</td>
+</tr>
+
+<tr>
+<td bgcolor=Silver height=20px nowrap>
+&nbsp;共 <span id="lblFolderNum" name="lblFolderNum">0</span> 子目录
+&nbsp;- <span id="lblFolder" name="lblFolder"></span>
+</td>
+<td bgcolor=Silver height=20px nowrap>
+&nbsp;共 <span id="lblFileNum" name="lblFileNum">0</span> 个文件
+&nbsp;- 文件:<span id="lblFile" name="lblFile"></span>
+</td>
+</tr>
+
+<tr><td colspan=2 bgcolor=Silver height=20px nowrap>
+<a href="adostream.reg" target="_blank" title="下载运行REG文件修正注册表,启用ADODB.Stream对象">
+S</a>&nbsp;
+<A href="" onclick="javascript:window.event.returnValue=false;">
+<span onclick="javascript:swichHide(this);" style="cursor:hand;">显示隐藏文件 </span></A>
+&nbsp;
+<A href="javascript:goto();" style="cursor:hand;">跳转至</A>
+<A href="javascript:goup();" style="cursor:hand;">上一级</A>&nbsp;
+<span id="lblFilePath" name="lblFilePath"></span>
+
+</td></tr>
+</table>
+
+<xml id="fileStyle"> 
+<files> 
+<xsl:for-each select="fitem" order-by="" xmlns:xsl="http://www.w3.org/TR/WD-xsl"> 
+<fitem> 
+<fname><xsl:value-of select="fname"/></fname>
+<bhide><xsl:value-of select="bhide"/></bhide> 
+<fsize><xsl:value-of select="fsize"/></fsize>
+<lsize><xsl:value-of select="lsize"/></lsize> 
+<ftype><xsl:value-of select="ftype"/></ftype>
+<ftime><xsl:value-of select="ftime"/></ftime> 
+</fitem> 
+</xsl:for-each> 
+</files> 
+</xml> 
+
+</BODY>
+</HTML>

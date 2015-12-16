@@ -1,0 +1,36 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: vIDC - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPDE.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_MBCS" /D "_LIB" /Fp"Debug/vIDC.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\yyc\oRmtsvc\Libs\vIDC\mportsvr_TCP.cpp"
+"D:\yyc\oRmtsvc\Libs\vIDC\vIDCc.cpp"
+"D:\yyc\oRmtsvc\Libs\vIDC\vIDCs.cpp"
+"D:\yyc\oRmtsvc\Libs\vIDC\vIDCs_Session.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPDE.tmp" 
+Creating command line "link.exe -lib /out:"..\bin\vIDC_d.lib"  .\Debug\mportsvr_TCP.obj .\Debug\vIDCc.obj .\Debug\vIDCs.obj .\Debug\vIDCs_Session.obj "
+<h3>Output Window</h3>
+Compiling...
+mportsvr_TCP.cpp
+vIDCc.cpp
+vIDCs.cpp
+vIDCs_Session.cpp
+Creating library...
+Microsoft (R) Library Manager Version 6.00.8168
+Copyright (C) Microsoft Corp 1992-1998. All rights reserved.
+
+
+
+
+<h3>Results</h3>
+vIDC_d.lib - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
