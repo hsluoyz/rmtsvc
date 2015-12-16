@@ -21,7 +21,7 @@ rmtsvc supports **Windows XP and later (including Win7, Win8 and Win10)**. You c
 ## Download
 
 If you don't want to build the binary by yourself, the prebuilt binaries can always be found here:
-https://github.com/nmap/npcap/releases
+https://github.com/hsluoyz/rmtsvc/releases
 
 ## License
 
