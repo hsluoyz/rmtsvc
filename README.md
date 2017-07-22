@@ -1,7 +1,7 @@
 rmtsvc
 ==========
 ![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)
-![Environment](https://img.shields.io/badge/Windows-XP, Vista, 7, 8, 10-yellow.svg)
+![Environment](https://img.shields.io/badge/Windows-XP,%20Vista,%207,%208,%2010-yellow.svg)
 ![License](https://img.shields.io/github/license/hsluoyz/rmtsvc.svg)
 
 rmtsvc is the abbreviation for **ReMoTe SerViCe**. It is A web-based remote desktop &amp; control service for Windows. [yycnet](http://bbs.pediy.com/member.php?u=106711) open-sourced the 2.5.2 code of rmtsvc at http://bbs.pediy.com/showthread.php?t=184683.
